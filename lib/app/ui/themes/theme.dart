@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
   static Color scaffoldBackground = const Color.fromRGBO(251, 253, 255, 1);
@@ -16,6 +17,7 @@ class AppColors {
 ThemeData primaryTheme = ThemeData(
   //   scaffold color
   scaffoldBackgroundColor: AppColors.scaffoldBackground,
+  fontFamily: GoogleFonts.dmSans().fontFamily,
 
   textTheme: TextTheme(
     headlineLarge: TextStyle(
@@ -33,6 +35,12 @@ ThemeData primaryTheme = ThemeData(
     titleSmall: TextStyle(
       fontSize: 14,
       color: AppColors.textGray,
+      fontWeight: FontWeight.w400,
+    ),
+
+    displaySmall: TextStyle(
+      fontSize: 14,
+      color: AppColors.primaryText,
       fontWeight: FontWeight.w400,
     ),
   ),

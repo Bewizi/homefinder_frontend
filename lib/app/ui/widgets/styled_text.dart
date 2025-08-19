@@ -43,11 +43,18 @@ class TextSmall extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: GoogleFonts.dmSans(
-        textStyle: Theme.of(context).textTheme.titleSmall,
-      ),
-    );
+    return Text(text, style: Theme.of(context).textTheme.titleSmall);
+  }
+}
+
+// Text Small Size 14
+class TextSmallOnboarding extends StatelessWidget {
+  const TextSmallOnboarding(this.text, {super.key});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(text, style: Theme.of(context).textTheme.displaySmall);
   }
 }
