@@ -9,6 +9,8 @@ class CustomTextFormField extends StatefulWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.keyboardType = TextInputType.text,
+    this.controller,
+    this.isPassword = false,
   });
 
   final String? Function(String?)? validator;
@@ -16,20 +18,41 @@ class CustomTextFormField extends StatefulWidget {
   final Icon? prefixIcon;
   final Icon? suffixIcon;
   final TextInputType? keyboardType;
+  final TextEditingController? controller;
+  final bool isPassword;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
 }
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
+  bool obscureText = true;
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      obscureText = !obscureText;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText: widget.isPassword ? obscureText : false,
       validator: widget.validator,
       keyboardType: widget.keyboardType,
+      controller: widget.controller,
       decoration: InputDecoration(
         prefixIcon: widget.prefixIcon,
-        suffixIcon: widget.suffixIcon,
+        suffixIcon: widget.isPassword
+            ? IconButton(
+                onPressed: _togglePasswordVisibility,
+                icon: Icon(
+                  obscureText ? Icons.visibility_off : Icons.visibility,
+                  color: AppColors.textGray,
+                  size: 16,
+                ),
+              )
+            : null,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(color: AppColors.borderColor),
