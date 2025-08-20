@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:frontend/app/ui/themes/theme.dart';
 import 'package:frontend/app/ui/widgets/custom_buttons.dart';
-import 'package:frontend/app/ui/widgets/custom_textformfield.dart';
 import 'package:frontend/app/ui/widgets/styled_text.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class OtpVerification extends StatefulWidget {
   const OtpVerification({super.key});
@@ -12,13 +13,105 @@ class OtpVerification extends StatefulWidget {
 }
 
 class _OtpVerificationState extends State<OtpVerification> {
+  final List<TextEditingController> _controllers = List.generate(
+    6,
+    (index) => TextEditingController(),
+  );
+
+  final List<FocusNode> _focusNodes = List.generate(6, (index) => FocusNode());
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    for (var controller in _controllers) {
+      controller.dispose();
+    }
+    for (var focusNode in _focusNodes) {
+      focusNode.dispose();
+    }
+    super.dispose();
+  }
+
+  void _onChanged(String value, int index) {
+    if (value.isNotEmpty) {
+      if (index < 5) {
+        _focusNodes[index + 1].requestFocus();
+      } else {
+        _focusNodes[index].unfocus();
+      }
+    }
+  }
+
+  void _onBackSpace(int index) {
+    if (index > 0) {
+      _focusNodes[index - 1].requestFocus();
+    }
+  }
+
+  String get otpCode {
+    return _controllers.map((controller) => controller.text).join();
+  }
+
+  Widget _buildOutputField(int index) {
+    return Container(
+      width: 48,
+      height: 48,
+      decoration: BoxDecoration(
+        color: AppColors.splashScreenText,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: _focusNodes[index].hasFocus
+              ? AppColors.primaryText
+              : AppColors.borderColor,
+          width: _focusNodes[index].hasFocus ? 2 : 1,
+        ),
+      ),
+      child: TextFormField(
+        controller: _controllers[index],
+        focusNode: _focusNodes[index],
+        keyboardType: TextInputType.number,
+        textAlign: TextAlign.center,
+        maxLength: 1,
+        style: GoogleFonts.outfit(
+          textStyle: Theme.of(context).textTheme.titleMedium,
+          fontWeight: FontWeight.w800,
+          fontSize: 28,
+          color: _controllers[index].text.isNotEmpty
+              ? AppColors.textBlack
+              : const Color.fromRGBO(164, 164, 164, 1),
+        ),
+        decoration: const InputDecoration(
+          border: InputBorder.none,
+          counterText: '',
+        ),
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+        onChanged: (value) => _onChanged(value, index),
+        onTap: () {
+          _controllers[index].selection = TextSelection.fromPosition(
+            TextPosition(offset: _controllers[index].text.length),
+          );
+        },
+        onEditingComplete: () {
+          if (index < 5) {
+            _focusNodes[index + 1].requestFocus();
+          }
+        },
+        onFieldSubmitted: (_) {
+          if (index < 5) {
+            _focusNodes[index + 1].requestFocus();
+          }
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 300),
+            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 300),
             child: Column(
               children: [
                 const TextHeading('OTP Verification'),
@@ -36,33 +129,22 @@ class _OtpVerificationState extends State<OtpVerification> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      //   phone number
-                      Text(
-                        'Phone Number',
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-
-                      SizedBox(height: 8),
-
-                      CustomTextFormField(
-                        prefixIcon: Icon(
-                          Icons.call,
-                          size: 20,
-                          color: AppColors.textGray,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: List.generate(
+                          6,
+                          (index) => _buildOutputField(index),
                         ),
-                        hintText: '+234-9000-000-000',
-                        keyboardType: TextInputType.phone,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your phone number';
-                          }
-                          return null;
-                        },
                       ),
 
                       SizedBox(height: 24),
 
-                      SubmitButton('Continue', onPressed: () {}),
+                      SubmitButton(
+                        'Continue',
+                        onPressed: () {
+                          print('OTP: $otpCode');
+                        },
+                      ),
 
                       SizedBox(height: 24),
 

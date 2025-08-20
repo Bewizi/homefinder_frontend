@@ -4,6 +4,7 @@ import 'package:frontend/app/ui/pages/auth/otp/otp_verification.dart';
 import 'package:frontend/app/ui/pages/auth/signin/signin.dart';
 import 'package:frontend/app/ui/pages/auth/signup/signup.dart';
 import 'package:frontend/app/ui/pages/getStarted/get_started.dart';
+import 'package:frontend/app/ui/pages/home.dart';
 import 'package:frontend/app/ui/pages/onBoarding/onBoarding.dart';
 import 'package:frontend/app/ui/pages/splashScreen/splash_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -16,6 +17,7 @@ class RouteNames {
   static const String signUp = '/signUp';
   static const String forgotPassword = '/forgotPassword';
   static const String otpVerification = '/otpVerification';
+  static const String home = '/home';
 }
 
 final GoRouter router = GoRouter(
@@ -48,6 +50,8 @@ final GoRouter router = GoRouter(
       path: RouteNames.otpVerification,
       builder: (context, state) => OtpVerification(),
     ),
+
+    GoRoute(path: RouteNames.home, builder: (context, state) => HomePage()),
   ],
 
   errorBuilder: (context, state) => ErrorScreen(error: state.error.toString()),
