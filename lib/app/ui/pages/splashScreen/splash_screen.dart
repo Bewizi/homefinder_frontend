@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:frontend/app/ui/pages/getStarted/get_started.dart';
+import 'package:frontend/app/routes/app_routes.dart';
 import 'package:frontend/app/ui/themes/theme.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -19,10 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     // wait for 3 seconds then navigate
     Future.delayed(const Duration(milliseconds: 5000), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const GetStarted()),
-      );
+      context.go(RouteNames.getStarted);
     });
   }
 
