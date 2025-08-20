@@ -1,10 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/app/ui/pages/auth/signup/signup.dart';
+import 'package:frontend/app/routes/app_routes.dart';
 import 'package:frontend/app/ui/themes/theme.dart';
 import 'package:frontend/app/ui/widgets/custom_buttons.dart';
 import 'package:frontend/app/ui/widgets/custom_textformfield.dart';
 import 'package:frontend/app/ui/widgets/styled_text.dart';
+import 'package:go_router/go_router.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -153,13 +154,7 @@ class _SignInState extends State<SignIn> {
                                   ),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (ctx) => Signup(),
-                                        ),
-                                        (route) => false,
-                                      );
+                                      context.go(RouteNames.signUp);
                                     },
                                 ),
                               ],

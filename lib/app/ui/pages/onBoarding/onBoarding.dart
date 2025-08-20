@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/app/routes/app_routes.dart';
 import 'package:frontend/app/ui/themes/theme.dart';
 import 'package:frontend/app/ui/widgets/styled_text.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Onboarding extends StatefulWidget {
@@ -144,7 +146,7 @@ class _OnboardingState extends State<Onboarding> {
                           ? _nextPage
                           : () {
                               // Handle completion - navigate to main app
-                              Navigator.pop(context);
+                              context.go(RouteNames.signIn);
                             },
                       icon: Icon(
                         _currentPage < _totalPages - 1

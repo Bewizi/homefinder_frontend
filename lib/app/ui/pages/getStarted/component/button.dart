@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/app/routes/app_routes.dart';
 import 'package:frontend/app/ui/pages/getStarted/component/textStyle.dart';
 import 'package:frontend/app/ui/pages/getStarted/component/theme.dart';
-import 'package:frontend/app/ui/pages/onBoarding/onBoarding.dart';
+import 'package:go_router/go_router.dart';
 
 class GetStartedButton extends StatefulWidget {
   const GetStartedButton({super.key});
@@ -15,11 +16,7 @@ class _GetStartedButtonState extends State<GetStartedButton> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (ctx) => Onboarding()),
-          (route) => false,
-        );
+        context.go(RouteNames.onBoarding);
       },
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(double.infinity, 48),
