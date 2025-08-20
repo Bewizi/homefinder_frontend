@@ -29,3 +29,36 @@ class _ButtonTextState extends State<ButtonText> {
     );
   }
 }
+
+// submitButton
+class SubmitButton extends StatefulWidget {
+  const SubmitButton(this.text, {super.key, this.onPressed});
+
+  final String text;
+  final void Function()? onPressed;
+
+  @override
+  State<SubmitButton> createState() => _SubmitButtonState();
+}
+
+class _SubmitButtonState extends State<SubmitButton> {
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: widget.onPressed,
+      style: ElevatedButton.styleFrom(
+        minimumSize: const Size(double.infinity, 48),
+        backgroundColor: AppColors.primaryButton,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        elevation: 0,
+      ),
+      child: Text(
+        widget.text,
+        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+          color: AppColors.splashScreenText,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+}

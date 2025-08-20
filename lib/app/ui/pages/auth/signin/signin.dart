@@ -1,19 +1,19 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/app/ui/pages/auth/signin/signin.dart';
+import 'package:frontend/app/ui/pages/auth/signup/signup.dart';
 import 'package:frontend/app/ui/themes/theme.dart';
 import 'package:frontend/app/ui/widgets/custom_buttons.dart';
 import 'package:frontend/app/ui/widgets/custom_textformfield.dart';
 import 'package:frontend/app/ui/widgets/styled_text.dart';
 
-class Signup extends StatefulWidget {
-  const Signup({super.key});
+class SignIn extends StatefulWidget {
+  const SignIn({super.key});
 
   @override
-  State<Signup> createState() => _SignupState();
+  State<SignIn> createState() => _SignInState();
 }
 
-class _SignupState extends State<Signup> {
+class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,12 +32,12 @@ class _SignupState extends State<Signup> {
 
                 const SizedBox(height: 8),
 
-                const TextHeading('Create Your Account'),
+                const TextHeading('Welcome Back'),
 
                 const SizedBox(height: 4),
 
                 const TextSmall(
-                  'Your next home is just a few clicks away',
+                  'Continue your home search in seconds.',
                   fontSize: 12,
                 ),
 
@@ -47,57 +47,6 @@ class _SignupState extends State<Signup> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      //   full name
-                      Text(
-                        'Full Name',
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-
-                      SizedBox(height: 8),
-
-                      CustomTextFormField(
-                        hintText: 'John Doe',
-                        prefixIcon: Icon(
-                          Icons.person_outline_rounded,
-                          size: 20,
-                          color: AppColors.textGray,
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your full name';
-                          }
-                          return null;
-                        },
-                      ),
-
-                      SizedBox(height: 16),
-
-                      //   phone number
-                      Text(
-                        'Phone Number',
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-
-                      SizedBox(height: 8),
-
-                      CustomTextFormField(
-                        prefixIcon: Icon(
-                          Icons.call,
-                          size: 20,
-                          color: AppColors.textGray,
-                        ),
-                        hintText: '+234-9000-000-000',
-                        keyboardType: TextInputType.phone,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your phone number';
-                          }
-                          return null;
-                        },
-                      ),
-
-                      SizedBox(height: 16),
-
                       //   email address
                       Text(
                         'Email Address',
@@ -132,29 +81,54 @@ class _SignupState extends State<Signup> {
 
                       SizedBox(height: 8),
 
-                      CustomTextFormField(
-                        prefixIcon: Icon(
-                          Icons.lock_outline_rounded,
-                          size: 20,
-                          color: AppColors.textGray,
-                        ),
-                        suffixIcon: Icon(
-                          Icons.remove_red_eye_outlined,
-                          size: 20,
-                          color: AppColors.textGray,
-                        ),
-                        hintText: '*****************',
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your password';
-                          }
-                          return null;
-                        },
+                      Column(
+                        children: [
+                          CustomTextFormField(
+                            prefixIcon: Icon(
+                              Icons.lock_outline_rounded,
+                              size: 20,
+                              color: AppColors.textGray,
+                            ),
+                            suffixIcon: Icon(
+                              Icons.remove_red_eye_outlined,
+                              size: 20,
+                              color: AppColors.textGray,
+                            ),
+                            hintText: '*****************',
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your password';
+                              }
+                              return null;
+                            },
+                          ),
+
+                          SizedBox(height: 8),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                  text: 'Forgot Password?',
+                                  style: Theme.of(context).textTheme.titleSmall
+                                      ?.copyWith(
+                                        color: AppColors.primaryText,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {},
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
 
                       SizedBox(height: 24),
 
-                      SubmitButton('Sign Up', onPressed: () {}),
+                      SubmitButton('Sign In', onPressed: () {}),
 
                       SizedBox(height: 14),
 
@@ -163,7 +137,7 @@ class _SignupState extends State<Signup> {
                         children: [
                           RichText(
                             text: TextSpan(
-                              text: 'Already have an account? ',
+                              text: 'Don’t have an account? ',
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
@@ -171,7 +145,7 @@ class _SignupState extends State<Signup> {
                               ),
                               children: [
                                 TextSpan(
-                                  text: 'Sign In',
+                                  text: 'Sign Up',
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w700,
@@ -182,7 +156,7 @@ class _SignupState extends State<Signup> {
                                       Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (ctx) => SignIn(),
+                                          builder: (ctx) => Signup(),
                                         ),
                                         (route) => false,
                                       );
