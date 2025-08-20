@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/app/data/models/user_models.dart';
 import 'package:frontend/app/routes/app_routes.dart';
 import 'package:frontend/app/ui/themes/theme.dart';
 import 'package:frontend/app/ui/widgets/custom_buttons.dart';
@@ -15,6 +16,97 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  final _formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
+
+  late TextEditingController _emailAddressController;
+  late TextEditingController _passwordController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _initializeControllers();
+  }
+
+  void _initializeControllers() {
+    _emailAddressController = TextEditingController();
+    _passwordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _emailAddressController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  String getSignInData() {
+    return '${_emailAddressController.text}|${_passwordController.text}';
+  }
+
+  Users _createSignInUsers() {
+    return Users.signIn(
+      emailAddress: _emailAddressController.text.trim(),
+      password: _passwordController.text.trim(),
+    );
+  }
+
+  Future<void> handleSignIn() async {
+    if (_formKey.currentState!.validate()) {
+      // String formData = getSignInData();
+      // print('Form Data: $formData');
+      // context.go(RouteNames.home);
+      setState(() {
+        _isLoading = true;
+      });
+
+      try {
+        String emailAddress = _emailAddressController.text.trim();
+        String password = _passwordController.text.trim();
+
+        Users signInUser = _createSignInUsers();
+        print('Sign in attempt for user: $emailAddress');
+
+        bool success = await AuthService.signIn(emailAddress, password);
+
+        if (success) {
+          // Show success message
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Sign in Successfully'),
+              backgroundColor: Colors.green,
+            ),
+          );
+
+          // Navigate to home
+          context.go(RouteNames.home);
+        } else {
+          // Show error message
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Invalid email and password. Please try again'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      } catch (e) {
+        // Handle errors
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('An error occurred: ${e.toString()}'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,6 +149,7 @@ class _SignInState extends State<SignIn> {
                       SizedBox(height: 8),
 
                       CustomTextFormField(
+                        controller: _emailAddressController,
                         prefixIcon: Icon(
                           Icons.mail_outline_rounded,
                           size: 20,
@@ -67,6 +160,11 @@ class _SignInState extends State<SignIn> {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your email address';
+                          }
+                          if (!RegExp(
+                            r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                          ).hasMatch(value)) {
+                            return 'Please enter a valid email address';
                           }
                           return null;
                         },
@@ -90,18 +188,18 @@ class _SignInState extends State<SignIn> {
                               size: 20,
                               color: AppColors.textGray,
                             ),
-                            suffixIcon: Icon(
-                              Icons.remove_red_eye_outlined,
-                              size: 20,
-                              color: AppColors.textGray,
-                            ),
+                            isPassword: true,
                             hintText: '*****************',
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter your password';
                               }
+                              if (value.length < 6) {
+                                return 'Password must be at least 6 characters';
+                              }
                               return null;
                             },
+                            controller: _passwordController,
                           ),
 
                           SizedBox(height: 8),
@@ -131,7 +229,13 @@ class _SignInState extends State<SignIn> {
 
                       SizedBox(height: 24),
 
-                      SubmitButton('Sign In', onPressed: () {}),
+                      _isLoading
+                          ? Center(
+                              child: CircularProgressIndicator(
+                                color: AppColors.primaryButton,
+                              ),
+                            )
+                          : SubmitButton('Sign In', onPressed: handleSignIn),
 
                       SizedBox(height: 14),
 
