@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:frontend/app/ui/pages/getStarted/component/button.dart';
 import 'package:frontend/app/ui/pages/getStarted/component/textStyle.dart';
 import 'package:frontend/app/ui/pages/getStarted/component/theme.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class GetStarted extends StatefulWidget {
   const GetStarted({super.key});
@@ -58,7 +57,6 @@ class _GetStartedState extends State<GetStarted> {
                         text: 'Already have an account? ',
                         style: TextStyle(
                           fontSize: 12,
-                          fontFamily: GoogleFonts.dmSans().fontFamily,
                           fontWeight: FontWeight.w500,
                           color: Colors.white,
                         ),
@@ -68,7 +66,6 @@ class _GetStartedState extends State<GetStarted> {
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
-                              fontFamily: GoogleFonts.dmSans().fontFamily,
                               color: TextColors.primaryButton,
                             ),
                             recognizer: TapGestureRecognizer()..onTap = () {},

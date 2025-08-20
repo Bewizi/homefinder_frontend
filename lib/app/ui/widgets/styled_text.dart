@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 // Text Heading Size 24
 class TextHeading extends StatelessWidget {
@@ -9,12 +8,7 @@ class TextHeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: GoogleFonts.dmSans(
-        textStyle: Theme.of(context).textTheme.headlineLarge,
-      ),
-    );
+    return Text(text, style: Theme.of(context).textTheme.headlineLarge);
   }
 }
 
@@ -26,24 +20,21 @@ class TextMedium extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: GoogleFonts.dmSans(
-        textStyle: Theme.of(context).textTheme.titleMedium,
-      ),
-    );
+    return Text(text, style: Theme.of(context).textTheme.titleMedium);
   }
 }
 
 // Text Small Size 14
 class TextSmall extends StatelessWidget {
-  const TextSmall(this.text, {super.key});
+  const TextSmall(this.text, {this.fontSize, super.key});
 
   final String text;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
-    return Text(text, style: Theme.of(context).textTheme.titleSmall);
+    final theme = Theme.of(context).textTheme.titleSmall;
+    return Text(text, style: theme?.copyWith(fontSize: fontSize));
   }
 }
 
