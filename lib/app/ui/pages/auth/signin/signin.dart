@@ -17,14 +17,13 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
-  bool _isLoading = false;
+  bool _isLoading = false; // Add loading state
 
   late TextEditingController _emailAddressController;
   late TextEditingController _passwordController;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _initializeControllers();
   }
@@ -36,46 +35,43 @@ class _SignInState extends State<SignIn> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _emailAddressController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
 
-  String getSignInData() {
-    return '${_emailAddressController.text}|${_passwordController.text}';
-  }
-
-  Users _createSignInUsers() {
+  // Create User object for sign-in
+  Users _createSignInUser() {
     return Users.signIn(
       emailAddress: _emailAddressController.text.trim(),
       password: _passwordController.text.trim(),
     );
   }
 
-  Future<void> handleSignIn() async {
+  // Handle signin with User model
+  Future<void> _handleSignIn() async {
     if (_formKey.currentState!.validate()) {
-      // String formData = getSignInData();
-      // print('Form Data: $formData');
-      // context.go(RouteNames.home);
       setState(() {
         _isLoading = true;
       });
 
       try {
-        String emailAddress = _emailAddressController.text.trim();
+        // Get signin credentials
+        String email = _emailAddressController.text.trim();
         String password = _passwordController.text.trim();
 
-        Users signInUser = _createSignInUsers();
-        print('Sign in attempt for user: $emailAddress');
+        // Create user object for debugging/logging
+        Users signInUser = _createSignInUser();
+        print('Sign in attempt for user: $email');
 
-        bool success = await AuthService.signIn(emailAddress, password);
+        // Call authentication service
+        bool success = await AuthService.signIn(email, password, signInUser);
 
         if (success) {
           // Show success message
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Sign in Successfully'),
+              content: Text('Sign in successful!'),
               backgroundColor: Colors.green,
             ),
           );
@@ -86,7 +82,7 @@ class _SignInState extends State<SignIn> {
           // Show error message
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Invalid email and password. Please try again'),
+              content: Text('Invalid email or password. Please try again.'),
               backgroundColor: Colors.red,
             ),
           );
@@ -137,6 +133,7 @@ class _SignInState extends State<SignIn> {
                 const SizedBox(height: 24),
                 //   Form
                 Form(
+                  key: _formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -229,13 +226,14 @@ class _SignInState extends State<SignIn> {
 
                       SizedBox(height: 24),
 
+                      // Show loading indicator when processing
                       _isLoading
                           ? Center(
                               child: CircularProgressIndicator(
                                 color: AppColors.primaryButton,
                               ),
                             )
-                          : SubmitButton('Sign In', onPressed: handleSignIn),
+                          : SubmitButton('Sign In', onPressed: _handleSignIn),
 
                       SizedBox(height: 14),
 
@@ -244,7 +242,7 @@ class _SignInState extends State<SignIn> {
                         children: [
                           RichText(
                             text: TextSpan(
-                              text: 'Don’t have an account? ',
+                              text: 'Don\'t have an account? ',
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
