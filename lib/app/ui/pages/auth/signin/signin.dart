@@ -119,7 +119,9 @@ class _SignInState extends State<SignIn> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                   recognizer: TapGestureRecognizer()
-                                    ..onTap = () {},
+                                    ..onTap = () {
+                                      context.go(RouteNames.forgotPassword);
+                                    },
                                 ),
                               ),
                             ],
