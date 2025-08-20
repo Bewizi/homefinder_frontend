@@ -24,17 +24,35 @@ class TextMedium extends StatelessWidget {
   }
 }
 
-// Text Small Size 14
+// Text Small Size 10-15
 class TextSmall extends StatelessWidget {
-  const TextSmall(this.text, {this.fontSize, super.key});
+  const TextSmall(
+    this.text, {
+    this.fontSize,
+    this.color,
+    this.fontWeight,
+    this.textAlign,
+    super.key,
+  });
 
   final String text;
   final double? fontSize;
+  final Color? color;
+  final FontWeight? fontWeight;
+  final TextAlign? textAlign;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).textTheme.titleSmall;
-    return Text(text, style: theme?.copyWith(fontSize: fontSize));
+    return Text(
+      text,
+      textAlign: textAlign,
+      style: theme?.copyWith(
+        fontSize: fontSize,
+        color: color,
+        fontWeight: fontWeight,
+      ),
+    );
   }
 }
 
