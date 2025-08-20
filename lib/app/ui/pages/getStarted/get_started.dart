@@ -1,8 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/app/routes/app_routes.dart';
 import 'package:frontend/app/ui/pages/getStarted/component/button.dart';
 import 'package:frontend/app/ui/pages/getStarted/component/textStyle.dart';
 import 'package:frontend/app/ui/pages/getStarted/component/theme.dart';
+import 'package:go_router/go_router.dart';
 
 class GetStarted extends StatefulWidget {
   const GetStarted({super.key});
@@ -68,7 +70,10 @@ class _GetStartedState extends State<GetStarted> {
                               fontWeight: FontWeight.w600,
                               color: TextColors.primaryButton,
                             ),
-                            recognizer: TapGestureRecognizer()..onTap = () {},
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                context.go(RouteNames.signIn);
+                              },
                           ),
                         ],
                       ),
