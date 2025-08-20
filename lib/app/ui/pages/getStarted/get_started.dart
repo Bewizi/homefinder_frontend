@@ -66,8 +66,8 @@ class _GetStartedState extends State<GetStarted> {
                           TextSpan(
                             text: 'Sign In',
                             style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
                               color: TextColors.primaryButton,
                             ),
                             recognizer: TapGestureRecognizer()
