@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/app/ui/pages/auth/forgotPassword/forgot_password.dart';
+import 'package:frontend/app/ui/pages/auth/otp/otp_verification.dart';
 import 'package:frontend/app/ui/pages/auth/signin/signin.dart';
 import 'package:frontend/app/ui/pages/auth/signup/signup.dart';
 import 'package:frontend/app/ui/pages/getStarted/get_started.dart';
@@ -12,6 +14,8 @@ class RouteNames {
   static const String onBoarding = '/onBoarding';
   static const String signIn = '/signIn';
   static const String signUp = '/signUp';
+  static const String forgotPassword = '/forgotPassword';
+  static const String otpVerification = '/otpVerification';
 }
 
 final GoRouter router = GoRouter(
@@ -34,6 +38,16 @@ final GoRouter router = GoRouter(
     GoRoute(path: RouteNames.signIn, builder: (context, state) => SignIn()),
 
     GoRoute(path: RouteNames.signUp, builder: (context, state) => Signup()),
+
+    GoRoute(
+      path: RouteNames.forgotPassword,
+      builder: (context, state) => ForgotPassword(),
+    ),
+
+    GoRoute(
+      path: RouteNames.otpVerification,
+      builder: (context, state) => OtpVerification(),
+    ),
   ],
 
   errorBuilder: (context, state) => ErrorScreen(error: state.error.toString()),
