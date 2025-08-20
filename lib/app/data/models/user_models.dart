@@ -66,7 +66,11 @@ class AuthService {
     return true;
   }
 
-  static Future<bool> signIn(String emailAddress, String password) async {
+  static Future<bool> signIn(
+    String emailAddress,
+    String password,
+    Users user,
+  ) async {
     print('Signing in user with email: $emailAddress');
 
     await Future.delayed(const Duration(seconds: 2));
