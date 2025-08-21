@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/app/ui/pages/homepage/widget/custom_dropDownMenu.dart';
+import 'package:frontend/app/ui/pages/homepage/components/custom_dropDownMenu.dart';
+import 'package:frontend/app/ui/pages/homepage/components/propertyType_button.dart';
 import 'package:frontend/app/ui/themes/theme.dart';
 import 'package:frontend/app/ui/widgets/styled_text.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
@@ -56,6 +57,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
+
+            const SizedBox(height: 24),
+
+            PropertyTypeButton(),
           ],
         ),
       ),
