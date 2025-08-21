@@ -6,11 +6,10 @@ import 'package:frontend/app/ui/pages/auth/signup/signup.dart';
 import 'package:frontend/app/ui/pages/getStarted/get_started.dart';
 import 'package:frontend/app/ui/pages/homepage/home.dart';
 import 'package:frontend/app/ui/pages/onBoarding/onBoarding.dart';
-import 'package:frontend/app/ui/pages/splashScreen/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class RouteNames {
-  static const String splashScreen = '/';
+  static const String homePage = '/';
   static const String getStarted = '/getStarted';
   static const String onBoarding = '/onBoarding';
   static const String signIn = '/signIn';
@@ -22,10 +21,7 @@ class RouteNames {
 
 final GoRouter router = GoRouter(
   routes: [
-    GoRoute(
-      path: RouteNames.splashScreen,
-      builder: (context, state) => SplashScreen(),
-    ),
+    GoRoute(path: RouteNames.homePage, builder: (context, state) => HomePage()),
 
     GoRoute(
       path: RouteNames.getStarted,
@@ -76,7 +72,7 @@ class ErrorScreen extends StatelessWidget {
             Text(error),
             SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () => context.go(RouteNames.splashScreen),
+              onPressed: () => context.go(RouteNames.home),
               child: Text('Go Home'),
             ),
           ],
