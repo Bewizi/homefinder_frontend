@@ -4,7 +4,7 @@ import 'package:frontend/app/ui/pages/auth/otp/otp_verification.dart';
 import 'package:frontend/app/ui/pages/auth/signin/signin.dart';
 import 'package:frontend/app/ui/pages/auth/signup/signup.dart';
 import 'package:frontend/app/ui/pages/getStarted/get_started.dart';
-import 'package:frontend/app/ui/pages/home.dart';
+import 'package:frontend/app/ui/pages/homepage/home.dart';
 import 'package:frontend/app/ui/pages/onBoarding/onBoarding.dart';
 import 'package:frontend/app/ui/pages/splashScreen/splash_screen.dart';
 import 'package:go_router/go_router.dart';
