@@ -1,10 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/app/routes/app_routes.dart';
-import 'package:frontend/app/ui/pages/getStarted/component/button.dart';
-import 'package:frontend/app/ui/pages/getStarted/component/textStyle.dart';
-import 'package:frontend/app/ui/pages/getStarted/component/theme.dart';
 import 'package:go_router/go_router.dart';
+import 'package:homefinder/app/routes/app_routes.dart';
+import 'package:homefinder/app/ui/pages/getStarted/component/button.dart';
+import 'package:homefinder/app/ui/pages/getStarted/component/textStyle.dart';
+import 'package:homefinder/app/ui/pages/getStarted/component/theme.dart';
 
 class GetStarted extends StatefulWidget {
   const GetStarted({super.key});

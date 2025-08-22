@@ -1,12 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/app/data/models/user_models.dart';
-import 'package:frontend/app/routes/app_routes.dart';
-import 'package:frontend/app/ui/themes/theme.dart';
-import 'package:frontend/app/ui/widgets/custom_buttons.dart';
-import 'package:frontend/app/ui/widgets/custom_textformfield.dart';
-import 'package:frontend/app/ui/widgets/styled_text.dart';
 import 'package:go_router/go_router.dart';
+import 'package:homefinder/app/data/models/user_models.dart';
+import 'package:homefinder/app/routes/app_routes.dart';
+import 'package:homefinder/app/ui/themes/theme.dart';
+import 'package:homefinder/app/ui/widgets/custom_buttons.dart';
+import 'package:homefinder/app/ui/widgets/custom_textformfield.dart';
+import 'package:homefinder/app/ui/widgets/styled_text.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});

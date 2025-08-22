@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/app/routes/app_routes.dart';
-import 'package:frontend/app/ui/pages/getStarted/component/textStyle.dart';
-import 'package:frontend/app/ui/pages/getStarted/component/theme.dart';
 import 'package:go_router/go_router.dart';
+import 'package:homefinder/app/routes/app_routes.dart';
+import 'package:homefinder/app/ui/pages/getStarted/component/textStyle.dart';
+import 'package:homefinder/app/ui/pages/getStarted/component/theme.dart';
 
 class GetStartedButton extends StatefulWidget {
   const GetStartedButton({super.key});

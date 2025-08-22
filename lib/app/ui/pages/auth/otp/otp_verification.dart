@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:frontend/app/ui/themes/theme.dart';
-import 'package:frontend/app/ui/widgets/custom_buttons.dart';
-import 'package:frontend/app/ui/widgets/styled_text.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homefinder/app/ui/themes/theme.dart';
+import 'package:homefinder/app/ui/widgets/custom_buttons.dart';
+import 'package:homefinder/app/ui/widgets/styled_text.dart';
 
 class OtpVerification extends StatefulWidget {
   const OtpVerification({super.key});

@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:frontend/app/routes/app_routes.dart';
-import 'package:frontend/app/ui/themes/theme.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homefinder/app/routes/app_routes.dart';
+import 'package:homefinder/app/ui/themes/theme.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

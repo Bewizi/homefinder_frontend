@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/app/routes/app_routes.dart';
-import 'package:frontend/app/ui/themes/theme.dart';
+import 'package:homefinder/app/routes/app_routes.dart';
+import 'package:homefinder/app/ui/themes/theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

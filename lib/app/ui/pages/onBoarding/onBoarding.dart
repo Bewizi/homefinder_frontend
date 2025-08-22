@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/app/routes/app_routes.dart';
-import 'package:frontend/app/ui/themes/theme.dart';
-import 'package:frontend/app/ui/widgets/styled_text.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homefinder/app/routes/app_routes.dart';
+import 'package:homefinder/app/ui/themes/theme.dart';
+import 'package:homefinder/app/ui/widgets/styled_text.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});

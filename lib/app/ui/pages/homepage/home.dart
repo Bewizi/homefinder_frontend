@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/app/ui/pages/homepage/components/custom_dropDownMenu.dart';
-import 'package:frontend/app/ui/pages/homepage/components/property.dart';
-import 'package:frontend/app/ui/pages/homepage/components/propertyType_button.dart';
-import 'package:frontend/app/ui/pages/homepage/components/recommended_property.dart';
-import 'package:frontend/app/ui/themes/theme.dart';
-import 'package:frontend/app/ui/widgets/styled_text.dart';
+import 'package:homefinder/app/ui/pages/homepage/components/custom_dropDownMenu.dart';
+import 'package:homefinder/app/ui/pages/homepage/components/property.dart';
+import 'package:homefinder/app/ui/pages/homepage/components/propertyType_button.dart';
+import 'package:homefinder/app/ui/pages/homepage/components/recommended_property.dart';
+import 'package:homefinder/app/ui/themes/theme.dart';
+import 'package:homefinder/app/ui/widgets/styled_text.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class HomePage extends StatefulWidget {
