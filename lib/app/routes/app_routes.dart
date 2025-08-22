@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/app/ui/pages/auth/forgotPassword/forgot_password.dart';
-import 'package:frontend/app/ui/pages/auth/otp/otp_verification.dart';
-import 'package:frontend/app/ui/pages/auth/signin/signin.dart';
-import 'package:frontend/app/ui/pages/auth/signup/signup.dart';
-import 'package:frontend/app/ui/pages/getStarted/get_started.dart';
-import 'package:frontend/app/ui/pages/homepage/home.dart';
-import 'package:frontend/app/ui/pages/onBoarding/onBoarding.dart';
 import 'package:go_router/go_router.dart';
+import 'package:homefinder/app/ui/pages/auth/forgotPassword/forgot_password.dart';
+import 'package:homefinder/app/ui/pages/auth/otp/otp_verification.dart';
+import 'package:homefinder/app/ui/pages/auth/signin/signin.dart';
+import 'package:homefinder/app/ui/pages/auth/signup/signup.dart';
+import 'package:homefinder/app/ui/pages/getStarted/get_started.dart';
+import 'package:homefinder/app/ui/pages/homepage/home.dart';
+import 'package:homefinder/app/ui/pages/onBoarding/onBoarding.dart';
 
 class RouteNames {
   static const String homePage = '/';
