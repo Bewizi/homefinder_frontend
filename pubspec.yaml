@@ -68,6 +68,8 @@ flutter:
     - assets/images/amico.png
     - assets/images/amico 2.png
     - assets/images/amico 3.png
+    - assets/images/Starlight Residence.png
+    - assets/images/Maplewood Cottage.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
