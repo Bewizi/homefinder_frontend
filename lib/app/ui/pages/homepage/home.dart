@@ -40,44 +40,52 @@ class _HomePageState extends State<HomePage> {
             // Fixed header
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Header row
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TextMedium('Location'),
-                          const SizedBox(height: 6),
-                          CustomDropDownMenu(),
-                        ],
-                      ),
-                      Container(
-                        width: 42,
-                        height: 42,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.borderColor,
-                            width: 1.5,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
+              child: Container(
+                decoration: BoxDecoration(color: Colors.white),
+                height: 170,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Header row
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextMedium('Location'),
+                            const SizedBox(height: 6),
+
+                            // Dropdown menu for location
+                            CustomDropDownMenu(),
+                          ],
                         ),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Badge(
-                            label: null,
-                            child: const Icon(LucideIcons.bell),
+
+                        // notification bell
+                        Container(
+                          width: 42,
+                          height: 42,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: AppColors.borderColor,
+                              width: 1.5,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: Badge(
+                              label: null,
+                              child: const Icon(LucideIcons.bell),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
-                  PropertyTypeButton(),
-                ],
+                      ],
+                    ),
+                    const SizedBox(height: 24),
+                    PropertyTypeButton(),
+                  ],
+                ),
               ),
             ),
           ],
