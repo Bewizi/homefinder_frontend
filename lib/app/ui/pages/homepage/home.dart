@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/app/ui/pages/homepage/components/custom_dropDownMenu.dart';
-import 'package:frontend/app/ui/pages/homepage/components/mySaqure.dart';
+import 'package:frontend/app/ui/pages/homepage/components/property.dart';
 import 'package:frontend/app/ui/pages/homepage/components/propertyType_button.dart';
+import 'package:frontend/app/ui/pages/homepage/components/recommended_property.dart';
 import 'package:frontend/app/ui/themes/theme.dart';
 import 'package:frontend/app/ui/widgets/styled_text.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
@@ -18,57 +19,68 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Stack(
+          children: [
+            // Scrollable content (Properties + RecommendedProperties)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.only(top: 180, bottom: 24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Properties(),
+                    SizedBox(height: 24),
+                    RecommendedProperties(),
+                  ],
+                ),
+              ),
+            ),
+
+            // Fixed header
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  // Header row
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      TextMedium('Location'),
-
-                      const SizedBox(height: 6),
-
-                      // Dropdown Menu for user to select location or places
-                      CustomDropDownMenu(),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextMedium('Location'),
+                          const SizedBox(height: 6),
+                          CustomDropDownMenu(),
+                        ],
+                      ),
+                      Container(
+                        width: 42,
+                        height: 42,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: AppColors.borderColor,
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: Badge(
+                            label: null,
+                            child: const Icon(LucideIcons.bell),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
-
-                  // notification icon
-                  Container(
-                    width: 42,
-                    height: 42,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: AppColors.borderColor,
-                        width: 1.5,
-                      ),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: Badge(
-                        label: null,
-                        child: const Icon(LucideIcons.bell),
-                      ),
-                    ),
-                  ),
+                  const SizedBox(height: 24),
+                  PropertyTypeButton(),
                 ],
               ),
-
-              const SizedBox(height: 24),
-
-              PropertyTypeButton(),
-
-              const SizedBox(height: 24),
-
-              const MySqaure(),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -1,22 +1,20 @@
-class Property {
+class RecommendedHomes {
   final String id;
   final bool isFavorite;
   final double rating;
   final String name;
   final String location;
-  final List<String> imageUrls;
   final String image;
   final double price;
   final String details;
   final List<String> specs;
 
-  Property({
+  RecommendedHomes({
     required this.id,
     this.isFavorite = false,
     required this.rating,
     required this.name,
     required this.location,
-    required this.imageUrls,
     required this.price,
     required this.details,
     required this.image,
@@ -29,27 +27,26 @@ class Property {
     'rating': rating,
     'homeName': name,
     'location': location,
-    'imageUrls': imageUrls,
     'price': price,
     'details': details,
     'image': image,
     'specs': specs,
   };
 
-  factory Property.fromJson(Map<String, dynamic> json) => Property(
-    id: json['id'] ?? '',
-    isFavorite: json['isFavorite'] ?? false,
-    rating: (json['rating'] ?? 0).toDouble(),
-    name: json['homeName'] ?? '',
-    location: json['location'] ?? '',
-    imageUrls: List<String>.from(json['imageUrls'] ?? []),
-    price: (json['price'] ?? 0).toDouble(),
-    details: json['details'] ?? '',
-    image: json['image'] ?? '',
-    specs: List<String>.from(json['specs'] ?? []),
-  );
+  factory RecommendedHomes.fromJson(Map<String, dynamic> json) =>
+      RecommendedHomes(
+        id: json['id'] ?? '',
+        isFavorite: json['isFavorite'] ?? false,
+        rating: (json['rating'] ?? 0).toDouble(),
+        name: json['homeName'] ?? '',
+        location: json['location'] ?? '',
+        price: (json['price'] ?? 0).toDouble(),
+        details: json['details'] ?? '',
+        image: json['image'] ?? '',
+        specs: List<String>.from(json['specs'] ?? []),
+      );
 
-  Property copyWith({
+  RecommendedHomes copyWith({
     String? id,
     bool? isFavorite,
     double? rating,
@@ -61,12 +58,11 @@ class Property {
     String? image,
     List<String>? specs,
   }) {
-    return Property(
+    return RecommendedHomes(
       id: id ?? this.id,
       rating: rating ?? this.rating,
       name: name ?? this.name,
       location: location ?? this.location,
-      imageUrls: imageUrls ?? this.imageUrls,
       price: price ?? this.price,
       details: details ?? this.details,
       image: image ?? this.image,
@@ -76,14 +72,14 @@ class Property {
 
   @override
   String toString() {
-    return 'Property(id: $id, image: $image, isFavorite: $isFavorite, rating: $rating, name: $name, location: $location, imageUrls: $imageUrls, price: $price, details: $details, specs: $specs)';
+    return 'Property(id: $id, image: $image, isFavorite: $isFavorite, rating: $rating, name: $name, location: $location, price: $price, details: $details, specs: $specs)';
   }
 }
 
-class PropertyService {
-  static List<Property> getSampleProperties() {
+class RecommendedPropertyService {
+  static List<RecommendedHomes> getRecommendedProperties() {
     return [
-      Property(
+      RecommendedHomes(
         id: '1',
         rating: 4.95,
         name: 'Starlight Residence',
@@ -92,12 +88,11 @@ class PropertyService {
             'A beautiful, modern apartment in the heart of downtown. Recently renovated with high-end finishes and appliances. Featuring an open floor plan, large windows providing plenty of natural light, and a spacious balcony with city views. Building amenities include a fitness center, rooftop lounge, and 24-hour concierge service.',
         price: 3.25,
         isFavorite: false,
-        imageUrls: [],
         image: 'assets/images/Starlight Residence.png',
         specs: ['3 Bedrooms', '2 Baths', '1,200 sqft'],
       ),
 
-      Property(
+      RecommendedHomes(
         id: '2',
         rating: 4.93,
         name: 'Maplewood Cottage',
@@ -106,15 +101,14 @@ class PropertyService {
             'A beautiful, modern apartment in the heart of downtown. Recently renovated with high-end finishes and appliances. Featuring an open floor plan, large windows providing plenty of natural light, and a spacious balcony with city views. Building amenities include a fitness center, rooftop lounge, and 24-hour concierge service.',
         price: 1.20,
         isFavorite: false,
-        imageUrls: [],
         image: 'assets/images/Maplewood Cottage.png',
         specs: ['2 Bedrooms', '2 Baths', '1,000 sqft'],
       ),
     ];
   }
 
-  static Future<List<Property>> getProperties() async {
+  static Future<List<RecommendedHomes>> getProperties() async {
     await Future.delayed(const Duration(seconds: 2));
-    return getSampleProperties();
+    return getRecommendedProperties();
   }
 }
