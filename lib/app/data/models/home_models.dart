@@ -79,15 +79,28 @@ class PropertyService {
     return [
       Property(
         id: '1',
-        rating: 4.5,
-        name: 'Cozy Apartment',
-        location: '123 Main St, City',
+        rating: 4.95,
+        name: 'Starlight Residence',
+        location: 'Oyin Jolayemi Street, Lagos',
         details:
             'A beautiful, modern apartment in the heart of downtown. Recently renovated with high-end finishes and appliances. Featuring an open floor plan, large windows providing plenty of natural light, and a spacious balcony with city views. Building amenities include a fitness center, rooftop lounge, and 24-hour concierge service.',
-        price: 3250000,
+        price: 3.25,
         isFavorite: false,
         imageUrls: [],
-        image: '',
+        image: 'assets/images/Starlight Residence.png',
+      ),
+
+      Property(
+        id: '2',
+        rating: 4.93,
+        name: 'Maplewood Cottage',
+        location: 'House 5, Ngozi Close, Port Harcourt',
+        details:
+            'A beautiful, modern apartment in the heart of downtown. Recently renovated with high-end finishes and appliances. Featuring an open floor plan, large windows providing plenty of natural light, and a spacious balcony with city views. Building amenities include a fitness center, rooftop lounge, and 24-hour concierge service.',
+        price: 1.20,
+        isFavorite: false,
+        imageUrls: [],
+        image: 'assets/images/Maplewood Cottage.png',
       ),
     ];
   }
