@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:homefinder/app/data/models/home_models.dart';
+import 'package:homefinder/app/routes/app_routes.dart';
 import 'package:homefinder/app/ui/themes/theme.dart';
 import 'package:homefinder/app/ui/widgets/custom_buttons.dart';
 import 'package:homefinder/app/ui/widgets/styled_text.dart';
@@ -21,6 +23,10 @@ class _PropertiesState extends State<Properties> {
   void initState() {
     super.initState();
     _getProperties();
+  }
+
+  void _navigateToAllProperties() {
+    context.push(RouteNames.allProperties);
   }
 
   Future<void> _getProperties() async {
@@ -52,7 +58,11 @@ class _PropertiesState extends State<Properties> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             TextMedium('Homes Near You'),
-            ButtonText('View All', fontSize: 12, onPressed: () {}),
+            ButtonText(
+              'View All',
+              fontSize: 12,
+              onPressed: _navigateToAllProperties,
+            ),
           ],
         ),
 
