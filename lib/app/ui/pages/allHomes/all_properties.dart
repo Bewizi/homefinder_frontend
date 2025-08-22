@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homefinder/app/data/models/home_models.dart';
-import 'package:homefinder/app/routes/app_routes.dart';
 import 'package:homefinder/app/ui/themes/theme.dart';
-import 'package:homefinder/app/ui/widgets/custom_buttons.dart';
 import 'package:homefinder/app/ui/widgets/styled_text.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
-class Properties extends StatefulWidget {
-  const Properties({super.key});
+class AllProperties extends StatefulWidget {
+  const AllProperties({super.key});
 
   @override
-  State<Properties> createState() => _PropertiesState();
+  State<AllProperties> createState() => _AllPropertiesState();
 }
 
-class _PropertiesState extends State<Properties> {
+class _AllPropertiesState extends State<AllProperties> {
   List<Property> _properties = [];
 
   bool _isLoading = true;
@@ -23,10 +22,6 @@ class _PropertiesState extends State<Properties> {
   void initState() {
     super.initState();
     _getProperties();
-  }
-
-  void _navigateToAllProperties() {
-    context.push(RouteNames.allProperties);
   }
 
   Future<void> _getProperties() async {
@@ -51,59 +46,123 @@ class _PropertiesState extends State<Properties> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            TextMedium('Homes Near You'),
-            ButtonText(
-              'View All',
-              fontSize: 12,
-              onPressed: _navigateToAllProperties,
-            ),
-          ],
-        ),
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  // search properties
+                  Expanded(
+                    flex: 20,
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          color: AppColors.borderColor,
+                          width: 1.5,
+                        ),
+                      ),
 
-        SizedBox(
-          height: 345,
-          child: _isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : _errorMessage != null
-              ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.error_outline, color: Colors.red, size: 48),
-                      const SizedBox(height: 16),
-                      Text(
-                        'Error loading properties',
-                        style: TextStyle(color: Colors.red),
+                      // input text field
+                      child: TextField(
+                        style: Theme.of(context).textTheme.titleMedium,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            LucideIcons.search,
+                            size: 16,
+                            color: AppColors.textGray,
+                          ),
+                          hintText: 'Search for properties',
+                          hintStyle: Theme.of(context).textTheme.titleSmall,
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                          ),
+
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                          ),
+                        ),
                       ),
-                      const SizedBox(height: 8),
-                      ElevatedButton(
-                        onPressed: _getProperties,
-                        child: const Text('Retry'),
-                      ),
-                    ],
+                    ),
                   ),
-                )
-              : _properties.isEmpty
-              ? const Center(child: Text('No properties available'))
-              : ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: _properties.length,
-                  itemBuilder: (context, index) {
-                    final property = _properties[index];
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 12),
-                      child: PropertyContainer(property: property),
-                    );
-                  },
-                ),
+
+                  Spacer(),
+
+                  // filter icon
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      width: 44,
+                      height: 40,
+                      padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: AppColors.borderColor,
+                          width: 1.5,
+                        ),
+                      ),
+                      child: Icon(
+                        FontAwesomeIcons.sliders,
+                        size: 20,
+                        color: Color.fromRGBO(82, 82, 82, 1),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 16),
+
+              Expanded(
+                child: _isLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : _errorMessage != null
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.error_outline,
+                              color: Colors.red,
+                              size: 48,
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              'Error loading properties',
+                              style: TextStyle(color: Colors.red),
+                            ),
+                            const SizedBox(height: 8),
+                            ElevatedButton(
+                              onPressed: _getProperties,
+                              child: const Text('Retry'),
+                            ),
+                          ],
+                        ),
+                      )
+                    : _properties.isEmpty
+                    ? const Center(child: Text('No properties available'))
+                    : ListView.builder(
+                        // scrollDirection: Axis.horizontal,
+                        itemCount: _properties.length,
+                        itemBuilder: (context, index) {
+                          final property = _properties[index];
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 12),
+                            child: PropertyContainer(property: property),
+                          );
+                        },
+                      ),
+              ),
+            ],
+          ),
         ),
-      ],
+      ),
     );
   }
 }
