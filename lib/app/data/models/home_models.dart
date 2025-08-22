@@ -8,6 +8,7 @@ class Property {
   final String image;
   final double price;
   final String details;
+  final List<String> specs;
 
   Property({
     required this.id,
@@ -19,6 +20,7 @@ class Property {
     required this.price,
     required this.details,
     required this.image,
+    required this.specs,
   });
 
   Map<String, dynamic> toJson() => {
@@ -31,6 +33,7 @@ class Property {
     'price': price,
     'details': details,
     'image': image,
+    'specs': specs,
   };
 
   factory Property.fromJson(Map<String, dynamic> json) => Property(
@@ -43,6 +46,7 @@ class Property {
     price: (json['price'] ?? 0).toDouble(),
     details: json['details'] ?? '',
     image: json['image'] ?? '',
+    specs: List<String>.from(json['specs'] ?? []),
   );
 
   Property copyWith({
@@ -55,6 +59,7 @@ class Property {
     double? price,
     String? details,
     String? image,
+    List<String>? specs,
   }) {
     return Property(
       id: id ?? this.id,
@@ -65,12 +70,13 @@ class Property {
       price: price ?? this.price,
       details: details ?? this.details,
       image: image ?? this.image,
+      specs: specs ?? this.specs,
     );
   }
 
   @override
   String toString() {
-    return 'Property(id: $id, image: $image, isFavorite: $isFavorite, rating: $rating, name: $name, location: $location, imageUrls: $imageUrls, price: $price, details: $details)';
+    return 'Property(id: $id, image: $image, isFavorite: $isFavorite, rating: $rating, name: $name, location: $location, imageUrls: $imageUrls, price: $price, details: $details, specs: $specs)';
   }
 }
 
@@ -88,6 +94,7 @@ class PropertyService {
         isFavorite: false,
         imageUrls: [],
         image: 'assets/images/Starlight Residence.png',
+        specs: ['3 Bedrooms', '2 Baths', '1,200 sqft'],
       ),
 
       Property(
@@ -101,6 +108,7 @@ class PropertyService {
         isFavorite: false,
         imageUrls: [],
         image: 'assets/images/Maplewood Cottage.png',
+        specs: ['2 Bedrooms', '2 Baths', '1,000 sqft'],
       ),
     ];
   }
