@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:homefinder/app/ui/pages/allHomes/all_properties.dart';
 import 'package:homefinder/app/ui/pages/auth/forgotPassword/forgot_password.dart';
 import 'package:homefinder/app/ui/pages/auth/otp/otp_verification.dart';
 import 'package:homefinder/app/ui/pages/auth/signin/signin.dart';
@@ -17,6 +18,7 @@ class RouteNames {
   static const String forgotPassword = '/forgotPassword';
   static const String otpVerification = '/otpVerification';
   static const String home = '/home';
+  static const String allProperties = '/allProperties';
 }
 
 final GoRouter router = GoRouter(
@@ -48,6 +50,11 @@ final GoRouter router = GoRouter(
     ),
 
     GoRoute(path: RouteNames.home, builder: (context, state) => HomePage()),
+
+    GoRoute(
+      path: RouteNames.allProperties,
+      builder: (context, state) => AllProperties(),
+    ),
   ],
 
   errorBuilder: (context, state) => ErrorScreen(error: state.error.toString()),
