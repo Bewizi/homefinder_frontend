@@ -4,9 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 // Button Text
 class ButtonText extends StatefulWidget {
-  const ButtonText(this.text, {super.key});
+  const ButtonText(this.text, {super.key, this.onPressed, this.fontSize});
 
   final String text;
+  final void Function()? onPressed;
+  final double? fontSize;
 
   @override
   State<ButtonText> createState() => _ButtonTextState();
@@ -16,12 +18,12 @@ class _ButtonTextState extends State<ButtonText> {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: widget.onPressed,
       child: Text(
         widget.text,
         style: TextStyle(
           fontFamily: GoogleFonts.dmSans().fontFamily,
-          fontSize: 16,
+          fontSize: widget.fontSize,
           fontWeight: FontWeight.w600,
           color: AppColors.primaryText,
         ),
