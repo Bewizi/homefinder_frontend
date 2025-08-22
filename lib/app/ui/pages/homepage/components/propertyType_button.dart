@@ -36,7 +36,7 @@ class _PropertyTypeButtonState extends State<PropertyTypeButton> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: isSelected
                     ? AppColors.primaryButton
-                    : Colors.white,
+                    : Colors.transparent,
                 foregroundColor: isSelected
                     ? AppColors.splashScreenText
                     : AppColors.textGray,
