@@ -14,6 +14,8 @@ class AllProperties extends StatefulWidget {
 
 class _AllPropertiesState extends State<AllProperties> {
   List<Property> _properties = [];
+  List<Property> _filteredProperties = [];
+  final TextEditingController _searchController = TextEditingController();
 
   bool _isLoading = true;
   String? _errorMessage;
@@ -22,6 +24,14 @@ class _AllPropertiesState extends State<AllProperties> {
   void initState() {
     super.initState();
     _getProperties();
+    _searchController.addListener(_filterProperties);
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_filterProperties);
+    _searchController.dispose();
+    super.dispose();
   }
 
   Future<void> _getProperties() async {
@@ -34,6 +44,7 @@ class _AllPropertiesState extends State<AllProperties> {
 
       setState(() {
         _properties = properties;
+        _filteredProperties = properties;
         _isLoading = false;
       });
     } catch (e) {
@@ -42,6 +53,24 @@ class _AllPropertiesState extends State<AllProperties> {
         _errorMessage = e.toString();
       });
     }
+  }
+
+  void _filterProperties() {
+    String searchTerm = _searchController.text.toLowerCase().trim();
+
+    setState(() {
+      if (searchTerm.isEmpty) {
+        _filteredProperties = _properties;
+      } else {
+        _filteredProperties = _properties.where((property) {
+          return property.name.toLowerCase().contains(searchTerm);
+        }).toList();
+      }
+    });
+  }
+
+  void _clearSearch() {
+    _searchController.clear();
   }
 
   @override
@@ -70,6 +99,7 @@ class _AllPropertiesState extends State<AllProperties> {
 
                       // input text field
                       child: TextField(
+                        controller: _searchController,
                         style: Theme.of(context).textTheme.titleMedium,
                         decoration: InputDecoration(
                           prefixIcon: Icon(
@@ -77,15 +107,25 @@ class _AllPropertiesState extends State<AllProperties> {
                             size: 16,
                             color: AppColors.textGray,
                           ),
+                          suffixIcon: _searchController.text.isNotEmpty
+                              ? IconButton(
+                                  icon: Icon(
+                                    Icons.clear,
+                                    size: 16,
+                                    color: AppColors.textGray,
+                                  ),
+                                  onPressed: _clearSearch,
+                                )
+                              : null,
                           hintText: 'Search for properties',
                           hintStyle: Theme.of(context).textTheme.titleSmall,
                           border: OutlineInputBorder(
                             borderSide: BorderSide.none,
                           ),
-
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide.none,
                           ),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 8),
                         ),
                       ),
                     ),
@@ -119,6 +159,18 @@ class _AllPropertiesState extends State<AllProperties> {
 
               SizedBox(height: 16),
 
+              // Show search results count
+              if (_searchController.text.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: Text(
+                    '${_filteredProperties.length} properties found',
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: AppColors.textGray),
+                  ),
+                ),
+
               Expanded(
                 child: _isLoading
                     ? const Center(child: CircularProgressIndicator())
@@ -145,13 +197,37 @@ class _AllPropertiesState extends State<AllProperties> {
                           ],
                         ),
                       )
-                    : _properties.isEmpty
-                    ? const Center(child: Text('No properties available'))
+                    : _filteredProperties.isEmpty
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.search_off,
+                              color: AppColors.textGray,
+                              size: 48,
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              _searchController.text.isEmpty
+                                  ? 'No properties available'
+                                  : 'No properties found for "${_searchController.text}"',
+                              style: TextStyle(color: AppColors.textGray),
+                            ),
+                            if (_searchController.text.isNotEmpty) ...[
+                              const SizedBox(height: 8),
+                              TextButton(
+                                onPressed: _clearSearch,
+                                child: const Text('Clear search'),
+                              ),
+                            ],
+                          ],
+                        ),
+                      )
                     : ListView.builder(
-                        // scrollDirection: Axis.horizontal,
-                        itemCount: _properties.length,
+                        itemCount: _filteredProperties.length,
                         itemBuilder: (context, index) {
-                          final property = _properties[index];
+                          final property = _filteredProperties[index];
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 12),
                             child: PropertyContainer(property: property),

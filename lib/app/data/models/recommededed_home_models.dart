@@ -82,27 +82,27 @@ class RecommendedPropertyService {
       RecommendedHomes(
         id: '1',
         rating: 4.95,
-        name: 'Starlight Residence',
-        location: 'Oyin Jolayemi Street, Lagos',
+        name: 'Pebble Creek Haven',
+        location: 'Plot 18, Blessing Estate, Ibadan',
         details:
             'A beautiful, modern apartment in the heart of downtown. Recently renovated with high-end finishes and appliances. Featuring an open floor plan, large windows providing plenty of natural light, and a spacious balcony with city views. Building amenities include a fitness center, rooftop lounge, and 24-hour concierge service.',
-        price: 3.25,
+        price: 2.2,
         isFavorite: false,
-        image: 'assets/images/Starlight Residence.png',
+        image: 'assets/images/Pebble Creek Haven.jpg',
         specs: ['3 Bedrooms', '2 Baths', '1,200 sqft'],
       ),
 
       RecommendedHomes(
         id: '2',
-        rating: 4.93,
-        name: 'Maplewood Cottage',
-        location: 'House 5, Ngozi Close, Port Harcourt',
+        rating: 4.95,
+        name: 'Blue Sky Villas',
+        location: '12 Olabisi Close, Lagos',
         details:
             'A beautiful, modern apartment in the heart of downtown. Recently renovated with high-end finishes and appliances. Featuring an open floor plan, large windows providing plenty of natural light, and a spacious balcony with city views. Building amenities include a fitness center, rooftop lounge, and 24-hour concierge service.',
-        price: 1.20,
+        price: 1.25,
         isFavorite: false,
-        image: 'assets/images/Maplewood Cottage.png',
-        specs: ['2 Bedrooms', '2 Baths', '1,000 sqft'],
+        image: 'assets/images/Blue Sky Villas.jpg',
+        specs: ['3 Bedrooms', '2 Baths', '1,200 sqft'],
       ),
     ];
   }

@@ -110,6 +110,34 @@ class PropertyService {
         image: 'assets/images/Maplewood Cottage.png',
         specs: ['2 Bedrooms', '2 Baths', '1,000 sqft'],
       ),
+
+      Property(
+        id: '3',
+        rating: 4.90,
+        name: 'Grove Homestead',
+        location: 'Block 3, Victoria Gardens, Lagos',
+        details:
+            'A beautiful, modern apartment in the heart of downtown. Recently renovated with high-end finishes and appliances. Featuring an open floor plan, large windows providing plenty of natural light, and a spacious balcony with city views. Building amenities include a fitness center, rooftop lounge, and 24-hour concierge service.',
+        price: 1.25,
+        isFavorite: false,
+        imageUrls: [],
+        image: 'assets/images/Grove Homestead.jpg',
+        specs: ['2 Bedrooms', '2 Baths', '1,200 sqft'],
+      ),
+
+      Property(
+        id: '4',
+        rating: 4.90,
+        name: 'Sunnydale Cottage',
+        location: 'Block 12, Mercy Estate, Ibadan',
+        details:
+            'A beautiful, modern apartment in the heart of downtown. Recently renovated with high-end finishes and appliances. Featuring an open floor plan, large windows providing plenty of natural light, and a spacious balcony with city views. Building amenities include a fitness center, rooftop lounge, and 24-hour concierge service.',
+        price: 1.50,
+        isFavorite: false,
+        imageUrls: [],
+        image: 'assets/images/Sunnydale Cottage.jpg',
+        specs: ['3 Bedrooms', '3 Baths', '1,200 sqft'],
+      ),
     ];
   }
 
