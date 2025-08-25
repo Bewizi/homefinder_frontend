@@ -18,6 +18,7 @@ class _PropertiesState extends State<Properties> {
 
   bool _isLoading = true;
   String? _errorMessage;
+  static const int _perPage = 3;
 
   @override
   void initState() {
@@ -25,10 +26,12 @@ class _PropertiesState extends State<Properties> {
     _getProperties();
   }
 
+  // view all properties
   void _navigateToAllProperties() {
     context.push(RouteNames.allProperties);
   }
 
+  // api from the backend
   Future<void> _getProperties() async {
     try {
       setState(() {
@@ -93,7 +96,9 @@ class _PropertiesState extends State<Properties> {
               ? const Center(child: Text('No properties available'))
               : ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: _properties.length,
+                  itemCount: _properties.length > _perPage
+                      ? _perPage
+                      : _properties.length,
                   itemBuilder: (context, index) {
                     final property = _properties[index];
                     return Padding(
