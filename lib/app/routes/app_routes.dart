@@ -1,3 +1,4 @@
+// Updated lib/app/routes/app_routes.dart
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homefinder/app/ui/pages/allHomes/all_properties.dart';
@@ -8,6 +9,7 @@ import 'package:homefinder/app/ui/pages/auth/signup/signup.dart';
 import 'package:homefinder/app/ui/pages/getStarted/get_started.dart';
 import 'package:homefinder/app/ui/pages/homepage/home.dart';
 import 'package:homefinder/app/ui/pages/onBoarding/onBoarding.dart';
+import 'package:homefinder/app/ui/pages/property_details/property_details.dart';
 
 class RouteNames {
   static const String homePage = '/';
@@ -19,6 +21,7 @@ class RouteNames {
   static const String otpVerification = '/otpVerification';
   static const String home = '/home';
   static const String allProperties = '/allProperties';
+  static const String propertyDetails = '/property-details';
 }
 
 final GoRouter router = GoRouter(
@@ -54,6 +57,15 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RouteNames.allProperties,
       builder: (context, state) => AllProperties(),
+    ),
+
+    // Property Details Route with parameter
+    GoRoute(
+      path: '/property-details/:propertyId',
+      builder: (context, state) {
+        final propertyId = state.pathParameters['propertyId']!;
+        return PropertyDetails(propertyId: propertyId);
+      },
     ),
   ],
 
