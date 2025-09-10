@@ -139,9 +139,23 @@ class _PropertyDetailsState extends State<PropertyDetails> {
                             children: [
                               Icon(Icons.star, color: Colors.amber, size: 16),
                               const SizedBox(width: 4),
-                              TextSmall(
-                                '4.95/5.0',
-                                fontWeight: FontWeight.w600,
+                              RichText(
+                                text: TextSpan(
+                                  text: property.rating.toString(),
+                                  style: TextStyle(
+                                    color: AppColors.darkGray,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: '/5.0',
+                                      style: TextStyle(
+                                        color: AppColors.darkGray,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
