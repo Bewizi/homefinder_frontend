@@ -64,3 +64,36 @@ class _SubmitButtonState extends State<SubmitButton> {
     );
   }
 }
+
+// Custom Button
+class CustomButtons extends StatefulWidget {
+  const CustomButtons({super.key, this.onPressed});
+
+  final void Function()? onPressed;
+
+  @override
+  State<CustomButtons> createState() => _CustomButtonsState();
+}
+
+class _CustomButtonsState extends State<CustomButtons> {
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: widget.onPressed,
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size(double.infinity, 48),
+        backgroundColor: Color(0xFFEDEDFC),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        elevation: 0,
+      ),
+      child: Text(
+        'Contact',
+        style: TextStyle(
+          color: AppColors.primaryText,
+          fontWeight: FontWeight.w600,
+          fontSize: 16,
+        ),
+      ),
+    );
+  }
+}
