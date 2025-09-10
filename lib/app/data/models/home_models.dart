@@ -8,6 +8,8 @@ class Property {
   final String image;
   final double price;
   final String details;
+  final String landLordName;
+  final String landLordImage;
   final List<String> specs;
 
   Property({
@@ -21,6 +23,8 @@ class Property {
     required this.details,
     required this.image,
     required this.specs,
+    required this.landLordName,
+    required this.landLordImage,
   });
 
   Map<String, dynamic> toJson() => {
@@ -34,6 +38,8 @@ class Property {
     'details': details,
     'image': image,
     'specs': specs,
+    'landLordName': landLordName,
+    'landLordImage': landLordImage,
   };
 
   factory Property.fromJson(Map<String, dynamic> json) => Property(
@@ -47,6 +53,8 @@ class Property {
     details: json['details'] ?? '',
     image: json['image'] ?? '',
     specs: List<String>.from(json['specs'] ?? []),
+    landLordName: json['landLordName'] ?? '',
+    landLordImage: json['landLordImage'] ?? '',
   );
 
   Property copyWith({
@@ -60,6 +68,8 @@ class Property {
     String? details,
     String? image,
     List<String>? specs,
+    String? landLordName,
+    String? landLordImage,
   }) {
     return Property(
       id: id ?? this.id,
@@ -71,12 +81,14 @@ class Property {
       details: details ?? this.details,
       image: image ?? this.image,
       specs: specs ?? this.specs,
+      landLordName: landLordName ?? this.landLordName,
+      landLordImage: landLordImage ?? this.landLordImage,
     );
   }
 
   @override
   String toString() {
-    return 'Property(id: $id, image: $image, isFavorite: $isFavorite, rating: $rating, name: $name, location: $location, imageUrls: $imageUrls, price: $price, details: $details, specs: $specs)';
+    return 'Property(id: $id, image: $image, isFavorite: $isFavorite, rating: $rating, name: $name, location: $location, imageUrls: $imageUrls, price: $price, details: $details, specs: $specs, landLordName: $landLordName, landLordImage: $landLordImage)';
   }
 }
 
@@ -95,6 +107,9 @@ class PropertyService {
         imageUrls: [],
         image: 'assets/images/Starlight Residence.png',
         specs: ['3 Bedrooms', '2 Baths', '1,200 sqft'],
+        landLordName: 'John Oliver',
+        landLordImage:
+            'https://images.pexels.com/photos/33811005/pexels-photo-33811005.jpeg',
       ),
 
       Property(
@@ -109,6 +124,9 @@ class PropertyService {
         imageUrls: [],
         image: 'assets/images/Maplewood Cottage.png',
         specs: ['2 Bedrooms', '2 Baths', '1,000 sqft'],
+        landLordName: 'Sarah Johnson',
+        landLordImage:
+            'https://images.pexels.com/photos/33774874/pexels-photo-33774874.jpeg',
       ),
 
       Property(
@@ -123,6 +141,9 @@ class PropertyService {
         imageUrls: [],
         image: 'assets/images/Grove Homestead.jpg',
         specs: ['2 Bedrooms', '2 Baths', '1,200 sqft'],
+        landLordName: 'Michael Smith',
+        landLordImage:
+            'https://images.pexels.com/photos/33799456/pexels-photo-33799456.jpeg',
       ),
 
       Property(
@@ -137,6 +158,9 @@ class PropertyService {
         imageUrls: [],
         image: 'assets/images/Sunnydale Cottage.jpg',
         specs: ['3 Bedrooms', '3 Baths', '1,200 sqft'],
+        landLordName: 'Emily Davis',
+        landLordImage:
+            'https://images.pexels.com/photos/19091621/pexels-photo-19091621.jpeg',
       ),
     ];
   }

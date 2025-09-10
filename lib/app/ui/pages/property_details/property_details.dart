@@ -248,7 +248,7 @@ class _PropertyDetailsState extends State<PropertyDetails> {
                                       CircleAvatar(
                                         radius: 45,
                                         backgroundImage: NetworkImage(
-                                          'https://images.pexels.com/photos/33811005/pexels-photo-33811005.jpeg',
+                                          property.landLordImage,
                                         ),
                                         backgroundColor: AppColors.darkGray,
                                         // child: Text('EP'),
@@ -257,7 +257,7 @@ class _PropertyDetailsState extends State<PropertyDetails> {
                                       const SizedBox(height: 16),
 
                                       // landlord name
-                                      TextMedium('Eleanor Pena'),
+                                      TextMedium(property.landLordName),
 
                                       const SizedBox(height: 4),
 
