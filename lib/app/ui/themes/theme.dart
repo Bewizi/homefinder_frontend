@@ -12,6 +12,8 @@ class AppColors {
   static Color borderColor = const Color.fromRGBO(234, 234, 234, 1);
   static Color buttonBackground = const Color.fromRGBO(238, 242, 255, 1);
   static Color splashScreenText = const Color.fromRGBO(255, 255, 255, 1);
+  static Color AliceBlue = const Color.fromRGBO(238, 242, 255, 1);
+  static Color darkGray = const Color.fromRGBO(82, 82, 82, 1);
 }
 
 class AppFontSize {
