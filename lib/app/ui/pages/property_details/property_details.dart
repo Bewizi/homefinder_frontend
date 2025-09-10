@@ -1,4 +1,3 @@
-// lib/app/ui/pages/propertyDetails/property_details.dart
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homefinder/app/provider/property_provider.dart';
@@ -62,7 +61,7 @@ class _PropertyDetailsState extends State<PropertyDetails> {
             slivers: [
               // App Bar with Image
               SliverAppBar(
-                expandedHeight: 300,
+                expandedHeight: 399,
                 pinned: true,
                 backgroundColor: AppColors.primaryButton,
                 leading: IconButton(
@@ -109,137 +108,211 @@ class _PropertyDetailsState extends State<PropertyDetails> {
               // Property Details Content
               SliverToBoxAdapter(
                 child: Container(
-                  padding: EdgeInsets.all(16),
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Property Name and Price
+                      // property name,location,rating,and specs
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(child: TextHeading(property.name)),
+                          // this will always upadate when the property changes
                           Container(
                             padding: EdgeInsets.symmetric(
-                              horizontal: 8,
+                              horizontal: 16,
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
-                              color: AppColors.buttonBackground,
-                              borderRadius: BorderRadius.circular(8),
+                              color: AppColors.AliceBlue,
+                              borderRadius: BorderRadius.circular(12),
                             ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.orange,
-                                  size: 16,
-                                ),
-                                SizedBox(width: 4),
-                                TextSmall(
-                                  property.rating.toString(),
-                                  color: AppColors.textBlack,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      SizedBox(height: 8),
-
-                      // Location
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.location_on_outlined,
-                            color: AppColors.textGray,
-                            size: 16,
-                          ),
-                          SizedBox(width: 8),
-                          Expanded(
-                            child: TextSmall(
-                              property.location,
-                              fontSize: 14,
-                              color: AppColors.textGray,
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      SizedBox(height: 16),
-
-                      // Price
-                      RichText(
-                        text: TextSpan(
-                          text: '₦${property.price}M',
-                          style: TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.w800,
-                            color: AppColors.primaryButton,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: '/year',
+                            child: Text(
+                              'Apartment',
                               style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.textGray,
+                                color: AppColors.primaryText,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-
-                      SizedBox(height: 24),
-
-                      // Specs
-                      TextMedium('Property Details'),
-                      SizedBox(height: 16),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          _buildSpecItem(Icons.bed_outlined, property.specs[0]),
-                          _buildSpecItem(
-                            Icons.bathtub_outlined,
-                            property.specs[1],
                           ),
-                          _buildSpecItem(
-                            Icons.square_foot_outlined,
-                            property.specs[2],
+                          // rating tag or text
+                          Row(
+                            children: [
+                              Icon(Icons.star, color: Colors.amber, size: 16),
+                              const SizedBox(width: 4),
+                              TextSmall(
+                                '4.95/5.0',
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ],
                           ),
                         ],
                       ),
 
-                      SizedBox(height: 24),
+                      const SizedBox(height: 8),
 
-                      // Description
-                      TextMedium('Description'),
-                      SizedBox(height: 12),
-                      TextSmall(
-                        property.details,
-                        fontSize: 14,
-                        color: AppColors.textGray,
+                      // Property Name,location and specs
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextMedium(property.name),
+                          const SizedBox(height: 8),
+                          Row(
+                            children: [
+                              Icon(Icons.location_on, size: 16),
+                              const SizedBox(width: 4),
+                              // property location
+                              TextSmall(property.location, fontSize: 12),
+                            ],
+                          ),
+
+                          // specs like bed,bath,area
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              _buildSpecItem(
+                                Icons.bed_outlined,
+                                property.specs[0],
+                              ),
+
+                              Container(
+                                height: 24,
+                                child: VerticalDivider(
+                                  color: AppColors.darkGray,
+                                  thickness: 1,
+                                ),
+                              ),
+
+                              _buildSpecItem(
+                                Icons.bathtub_outlined,
+                                property.specs[1],
+                              ),
+
+                              Container(
+                                height: 24,
+                                child: VerticalDivider(
+                                  color: AppColors.darkGray,
+                                  thickness: 1,
+                                ),
+                              ),
+
+                              _buildSpecItem(
+                                Icons.square_foot_outlined,
+                                property.specs[2],
+                              ),
+                            ],
+                          ),
+
+                          const SizedBox(height: 32),
+
+                          // description
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TextMedium('Details'),
+                              const SizedBox(height: 8),
+                              TextSmall(
+                                property.details,
+                                height: 2,
+                                textAlign: TextAlign.justify,
+                              ),
+                            ],
+                          ),
+
+                          const SizedBox(height: 32),
+
+                          // landlord details and contact button
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TextMedium('Landlord Details'),
+
+                              const SizedBox(height: 16),
+
+                              Center(
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 24,
+                                    vertical: 8,
+                                  ),
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: AppColors.borderColor,
+                                      width: 1.5,
+                                    ),
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      // image of the landlord
+                                      CircleAvatar(
+                                        radius: 45,
+                                        backgroundImage: NetworkImage(
+                                          'https://images.pexels.com/photos/33811005/pexels-photo-33811005.jpeg',
+                                        ),
+                                        backgroundColor: AppColors.darkGray,
+                                        // child: Text('EP'),
+                                      ),
+
+                                      const SizedBox(height: 16),
+
+                                      // landlord name
+                                      TextMedium('Eleanor Pena'),
+
+                                      const SizedBox(height: 4),
+
+                                      // verified tag
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 12,
+                                          vertical: 4,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFFF0FDF4),
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Icon(
+                                              Icons.verified,
+                                              color: Color(0xFF22C55E),
+                                              size: 12,
+                                            ),
+                                            const SizedBox(width: 4),
+                                            Text(
+                                              'Verified',
+                                              style: TextStyle(
+                                                color: Color(0xFF22C55E),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+
+                                      const SizedBox(height: 16),
+                                      TextSmall(
+                                        'Trusted landlord known for prompt communication, well-\nmaintained properties, and a tenant-first approach.',
+                                        textAlign: TextAlign.center,
+                                        height: 2,
+                                        color: AppColors.darkGray,
+                                      ),
+
+                                      const SizedBox(height: 16),
+
+                                      CustomButtons(onPressed: () {}),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-
-                      SizedBox(height: 32),
-
-                      // Contact Button
-                      SubmitButton(
-                        'Contact Agent',
-                        onPressed: () {
-                          // Implement contact functionality
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Contact feature coming soon!'),
-                            ),
-                          );
-                        },
-                      ),
-
-                      SizedBox(height: 16),
                     ],
                   ),
                 ),
@@ -254,14 +327,11 @@ class _PropertyDetailsState extends State<PropertyDetails> {
   Widget _buildSpecItem(IconData icon, String spec) {
     return Container(
       padding: EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: AppColors.buttonBackground,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
+
+      child: Row(
         children: [
-          Icon(icon, color: AppColors.primaryButton, size: 24),
-          SizedBox(height: 8),
+          Icon(icon, color: AppColors.darkGray, size: 24),
+          SizedBox(width: 8),
           TextSmall(spec, fontSize: 12, fontWeight: FontWeight.w600),
         ],
       ),

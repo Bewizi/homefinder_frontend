@@ -32,6 +32,7 @@ class TextSmall extends StatelessWidget {
     this.color,
     this.fontWeight,
     this.textAlign,
+    this.height,
     super.key,
   });
 
@@ -40,6 +41,7 @@ class TextSmall extends StatelessWidget {
   final Color? color;
   final FontWeight? fontWeight;
   final TextAlign? textAlign;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +53,7 @@ class TextSmall extends StatelessWidget {
         fontSize: fontSize,
         color: color,
         fontWeight: fontWeight,
+        height: height,
       ),
     );
   }
