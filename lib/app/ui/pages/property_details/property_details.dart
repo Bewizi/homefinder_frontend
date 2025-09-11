@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:homefinder/app/data/models/home_models.dart';
 import 'package:homefinder/app/provider/property_provider.dart';
 import 'package:homefinder/app/ui/themes/theme.dart';
 import 'package:homefinder/app/ui/widgets/custom_buttons.dart';
@@ -16,6 +17,20 @@ class PropertyDetails extends StatefulWidget {
 }
 
 class _PropertyDetailsState extends State<PropertyDetails> {
+  final PageController _pageController = PageController();
+  int currentPage = 0;
+  final int _totalPage = 5;
+
+  List<String> _getPropertyImages(Property property) {
+    List<String> imagesUrl = [];
+
+    if (property.imageUrls.isNotEmpty) {
+      imagesUrl.addAll(property.imageUrls);
+    }
+
+    return imagesUrl;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -31,6 +46,24 @@ class _PropertyDetailsState extends State<PropertyDetails> {
     });
   }
 
+  void _nextPage() {
+    if (currentPage < _totalPage - 1) {
+      _pageController.nextPage(
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  void _previousPage() {
+    if (currentPage > 0) {
+      _pageController.previousPage(
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +72,7 @@ class _PropertyDetailsState extends State<PropertyDetails> {
         builder: (context, propertyProvider, child) {
           final property = propertyProvider.selectedProperty;
 
+          // if no property found
           if (property == null) {
             return Center(
               child: Column(
@@ -57,6 +91,9 @@ class _PropertyDetailsState extends State<PropertyDetails> {
             );
           }
 
+          // property images
+          final imagesUrl = _getPropertyImages(property);
+
           return CustomScrollView(
             slivers: [
               // App Bar with Image
@@ -64,44 +101,130 @@ class _PropertyDetailsState extends State<PropertyDetails> {
                 expandedHeight: 399,
                 pinned: true,
                 backgroundColor: AppColors.primaryButton,
+                // go back arrow
                 leading: IconButton(
                   onPressed: () => context.pop(),
-                  icon: Container(
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: AppColors.textBlack,
-                      size: 16,
-                    ),
+                  icon: Icon(
+                    Icons.arrow_back,
+                    size: 32,
+                    color: AppColors.splashScreenText,
                   ),
                 ),
                 actions: [
+                  // favorite icons to love a property
                   IconButton(
                     onPressed: () {},
-                    icon: Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        property.isFavorite
-                            ? Icons.favorite
-                            : Icons.favorite_outline,
-                        color: property.isFavorite
-                            ? Colors.red
-                            : AppColors.textBlack,
-                        size: 20,
-                      ),
+                    icon: Icon(
+                      property.isFavorite
+                          ? Icons.favorite
+                          : Icons.favorite_outline,
+                      color: property.isFavorite
+                          ? Colors.red
+                          : AppColors.splashScreenText,
+                      size: 32,
                     ),
                   ),
                 ],
                 flexibleSpace: FlexibleSpaceBar(
-                  background: Image.asset(property.image, fit: BoxFit.cover),
+                  background: Stack(
+                    children: [
+                      PageView.builder(
+                        controller: _pageController,
+                        onPageChanged: (pages) {
+                          setState(() {
+                            currentPage = pages;
+                          });
+                        },
+                        itemCount: imagesUrl.length,
+                        itemBuilder: (context, index) {
+                          return SizedBox(
+                            width: double.infinity,
+                            child: _buildPropertyImages(imagesUrl[index]),
+                          );
+                        },
+                      ),
+
+                      // ADDED:next and previous arrows for the images
+                      Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // previous arrow icon
+                            IconButton(
+                              onPressed: _previousPage,
+                              icon: Container(
+                                padding: EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xFFFFFFFF),
+                                      Color(0xFFC8C8C8),
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  Icons.arrow_back_ios_rounded,
+                                  color: AppColors.textBlack,
+                                  size: 24,
+                                ),
+                              ),
+                            ),
+
+                            // next arrow icon
+                            IconButton(
+                              onPressed: _nextPage,
+                              icon: Container(
+                                padding: EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xFFFFFFFF),
+                                      Color(0xFFC8C8C8),
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  color: AppColors.textBlack,
+                                  size: 24,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // ADDED: Dots indicator at bottom
+                      Positioned(
+                        bottom: 20,
+                        left: 0,
+                        right: 0,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: List.generate(
+                            imagesUrl.length,
+                            (index) => Container(
+                              margin: EdgeInsets.symmetric(horizontal: 3),
+                              width: currentPage == index ? 24 : 8,
+                              height: 8,
+                              decoration: BoxDecoration(
+                                color: currentPage == index
+                                    ? AppColors.primaryButton
+                                    : AppColors.splashScreenText,
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
 
@@ -338,6 +461,37 @@ class _PropertyDetailsState extends State<PropertyDetails> {
     );
   }
 
+  // widget for other images
+  Widget _buildPropertyImages(String imageUrls) {
+    return Image.network(
+      imageUrls,
+      fit: BoxFit.cover,
+      loadingBuilder: (context, child, loadingProgress) {
+        if (loadingProgress == null) return child;
+        return Center(
+          child: CircularProgressIndicator(
+            value: loadingProgress.expectedTotalBytes != null
+                ? loadingProgress.cumulativeBytesLoaded /
+                      loadingProgress.expectedTotalBytes!
+                : null,
+          ),
+        );
+      },
+
+      errorBuilder: (context, error, stackTrace) {
+        return Container(
+          color: Colors.grey[300],
+          child: Icon(
+            Icons.image_not_supported,
+            color: Colors.grey[600],
+            size: 50,
+          ),
+        );
+      },
+    );
+  }
+
+  // Widget for property specs
   Widget _buildSpecItem(IconData icon, String spec) {
     return Container(
       padding: EdgeInsets.all(12),
