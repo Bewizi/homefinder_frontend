@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:homefinder/app/data/models/home_models.dart';
 import 'package:homefinder/app/provider/property_provider.dart';
 import 'package:homefinder/app/ui/themes/theme.dart';
+import 'package:homefinder/app/ui/widgets/filter_bottom_sheet.dart';
 import 'package:homefinder/app/ui/widgets/styled_text.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:provider/provider.dart';
@@ -144,7 +145,7 @@ class _AllPropertiesState extends State<AllProperties> {
 
                   // filter icon
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () => ShowPropertyFilter.showModal(context),
                     child: Container(
                       width: 44,
                       height: 40,
