@@ -11,6 +11,8 @@ import 'package:homefinder/app/ui/widgets/styled_text.dart';
 class Signup extends StatefulWidget {
   const Signup({super.key});
 
+  static const String routeName = '/signUp';
+
   @override
   State<Signup> createState() => _SignupState();
 }

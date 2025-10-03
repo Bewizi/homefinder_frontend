@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homefinder/app/routes/app_routes.dart';
+import 'package:homefinder/app/ui/pages/auth/otp/otp_verification.dart';
 import 'package:homefinder/app/ui/themes/theme.dart';
 import 'package:homefinder/app/ui/widgets/custom_buttons.dart';
 import 'package:homefinder/app/ui/widgets/custom_textformfield.dart';
@@ -8,6 +9,8 @@ import 'package:homefinder/app/ui/widgets/styled_text.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
+
+  static const String routeName = '/forgotPassword';
 
   @override
   State<ForgotPassword> createState() => _ForgotPasswordState();
@@ -67,7 +70,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       SubmitButton(
                         'Send OTP Code',
                         onPressed: () {
-                          context.go(RouteNames.otpVerification);
+                          context.go(OtpVerification.routeName);
                         },
                       ),
                     ],

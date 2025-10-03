@@ -8,6 +8,8 @@ import 'package:homefinder/app/ui/widgets/styled_text.dart';
 class OtpVerification extends StatefulWidget {
   const OtpVerification({super.key});
 
+  static const String routeName = '/otpVerification';
+
   @override
   State<OtpVerification> createState() => _OtpVerificationState();
 }

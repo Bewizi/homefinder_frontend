@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homefinder/app/data/models/user_models.dart';
 import 'package:homefinder/app/routes/app_routes.dart';
+import 'package:homefinder/app/ui/pages/auth/forgotPassword/forgot_password.dart';
+import 'package:homefinder/app/ui/pages/auth/signup/signup.dart';
 import 'package:homefinder/app/ui/themes/theme.dart';
 import 'package:homefinder/app/ui/widgets/custom_buttons.dart';
 import 'package:homefinder/app/ui/widgets/custom_textformfield.dart';
@@ -10,6 +12,8 @@ import 'package:homefinder/app/ui/widgets/styled_text.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
+
+  static const String routeName = '/signIn';
 
   @override
   State<SignIn> createState() => _SignInState();
@@ -215,7 +219,7 @@ class _SignInState extends State<SignIn> {
                                       ),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      context.go(RouteNames.forgotPassword);
+                                      context.go(ForgotPassword.routeName);
                                     },
                                 ),
                               ),
@@ -258,7 +262,7 @@ class _SignInState extends State<SignIn> {
                                   ),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      context.go(RouteNames.signUp);
+                                      context.go(Signup.routeName);
                                     },
                                 ),
                               ],
