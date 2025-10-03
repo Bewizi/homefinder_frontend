@@ -9,6 +9,8 @@ import 'package:homefinder/app/ui/pages/getStarted/component/theme.dart';
 class GetStarted extends StatefulWidget {
   const GetStarted({super.key});
 
+  static const String routeName = '/getStarted';
+
   @override
   State<GetStarted> createState() => _GetStartedState();
 }
