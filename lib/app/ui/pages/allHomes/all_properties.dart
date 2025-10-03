@@ -12,6 +12,8 @@ import 'package:provider/provider.dart';
 class AllProperties extends StatefulWidget {
   const AllProperties({super.key});
 
+  static const String routeName = '/allProperties';
+
   @override
   State<AllProperties> createState() => _AllPropertiesState();
 }
