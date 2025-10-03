@@ -10,6 +10,7 @@ import 'package:homefinder/app/ui/pages/getStarted/get_started.dart';
 import 'package:homefinder/app/ui/pages/homepage/home.dart';
 import 'package:homefinder/app/ui/pages/onBoarding/onBoarding.dart';
 import 'package:homefinder/app/ui/pages/property_details/property_details.dart';
+import 'package:homefinder/app/ui/pages/splashScreen/splash_screen.dart';
 
 class RouteNames {
   static const String homePage = '/';
@@ -26,36 +27,57 @@ class RouteNames {
 
 final GoRouter router = GoRouter(
   routes: [
-    GoRoute(path: RouteNames.homePage, builder: (context, state) => HomePage()),
+    GoRoute(
+      path: SplashScreen.routeName,
+      name: 'splashScreen',
+      builder: (context, state) => SplashScreen(),
+    ),
 
     GoRoute(
-      path: RouteNames.getStarted,
+      path: GetStarted.routeName,
+      name: 'getStarted',
       builder: (context, state) => GetStarted(),
     ),
 
     GoRoute(
-      path: RouteNames.onBoarding,
+      path: Onboarding.routeName,
+      name: 'onBoarding',
       builder: (context, state) => Onboarding(),
     ),
 
-    GoRoute(path: RouteNames.signIn, builder: (context, state) => SignIn()),
-
-    GoRoute(path: RouteNames.signUp, builder: (context, state) => Signup()),
+    GoRoute(
+      path: SignIn.routeName,
+      name: 'signIn',
+      builder: (context, state) => SignIn(),
+    ),
 
     GoRoute(
-      path: RouteNames.forgotPassword,
+      path: Signup.routeName,
+      name: 'signUp',
+      builder: (context, state) => Signup(),
+    ),
+
+    GoRoute(
+      path: ForgotPassword.routeName,
+      name: 'forgotPassword',
       builder: (context, state) => ForgotPassword(),
     ),
 
     GoRoute(
-      path: RouteNames.otpVerification,
+      path: OtpVerification.routeName,
+      name: 'otpVerification',
       builder: (context, state) => OtpVerification(),
     ),
 
-    GoRoute(path: RouteNames.home, builder: (context, state) => HomePage()),
+    GoRoute(
+      path: HomePage.routeName,
+      name: 'home',
+      builder: (context, state) => HomePage(),
+    ),
 
     GoRoute(
-      path: RouteNames.allProperties,
+      path: AllProperties.routeName,
+      name: 'allProperties',
       builder: (context, state) => AllProperties(),
     ),
 
