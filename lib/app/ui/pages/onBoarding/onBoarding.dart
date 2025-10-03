@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:homefinder/app/routes/app_routes.dart';
+import 'package:homefinder/app/ui/pages/auth/signin/signin.dart';
 import 'package:homefinder/app/ui/themes/theme.dart';
 import 'package:homefinder/app/ui/widgets/styled_text.dart';
+import 'package:homefinder/constant/svgs.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});
+
+  static const String routeName = '/onBoarding';
 
   @override
   State<Onboarding> createState() => _OnboardingState();
@@ -69,7 +73,7 @@ class _OnboardingState extends State<Onboarding> {
                     title: 'Direct Rentals Made Easy ',
                     description:
                         'Homefinder connects you with verified landlords, so you can find your next home with trust, transparency, and no hidden costs.',
-                    imagePath: 'assets/images/amico.png',
+                    imagePath: AppSvgs.kAmicoOne,
                   ),
 
                   // Second Page
@@ -77,7 +81,7 @@ class _OnboardingState extends State<Onboarding> {
                     title: 'See It Like You\'re There',
                     description:
                         'Each listing comes with a detailed video tour showcasing the house. You can also schedule in-person tour to inspect the space at no cost.',
-                    imagePath: 'assets/images/amico 2.png',
+                    imagePath: AppSvgs.kAmicoTwo,
                   ),
 
                   // Third Page
@@ -85,7 +89,7 @@ class _OnboardingState extends State<Onboarding> {
                     title: 'Rent Smarter, All in One App',
                     description:
                         'Homefinder gives you full control of your rental journey. Explore listings, chat with landlords, make payment, send move-out notice,  all within the app.',
-                    imagePath: 'assets/images/amico 3.png',
+                    imagePath: AppSvgs.kAmicoThree,
                   ),
                 ],
               ),
@@ -146,7 +150,7 @@ class _OnboardingState extends State<Onboarding> {
                           ? _nextPage
                           : () {
                               // Handle completion - navigate to main app
-                              context.go(RouteNames.signIn);
+                              context.go(SignIn.routeName);
                             },
                       icon: Icon(
                         _currentPage < _totalPages - 1
@@ -182,9 +186,11 @@ class _OnboardingState extends State<Onboarding> {
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
+              child: SvgPicture.asset(
                 imagePath,
-                fit: BoxFit.cover,
+                width: 340,
+                height: 309,
+                fit: BoxFit.scaleDown,
                 errorBuilder: (context, error, stackTrace) {
                   return Container(
                     color: Colors.grey.shade100,

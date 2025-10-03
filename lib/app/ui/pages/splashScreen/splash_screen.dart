@@ -3,11 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:homefinder/app/routes/app_routes.dart';
+import 'package:homefinder/app/ui/pages/getStarted/get_started.dart';
 import 'package:homefinder/app/ui/themes/theme.dart';
+import 'package:homefinder/constant/image.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  static const String routeName = '/';
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -20,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     // wait for 3 seconds then navigate
     Future.delayed(const Duration(milliseconds: 5000), () {
-      context.go(RouteNames.getStarted);
+      context.go(GetStarted.routeName);
     });
   }
 
@@ -34,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/images/logo.png', height: 80, width: 80),
+              Image.asset(AppImages.logo, height: 80, width: 80),
               const SizedBox(height: 16),
               Text(
                 'Homefinder',
