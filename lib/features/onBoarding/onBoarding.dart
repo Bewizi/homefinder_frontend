@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:homefinder/app/ui/pages/auth/signin/signin.dart';
-import 'package:homefinder/app/ui/themes/theme.dart';
-import 'package:homefinder/app/ui/widgets/styled_text.dart';
-import 'package:homefinder/constant/svgs.dart';
+import 'package:homefinder/core/presentation/constant/svgs.dart';
+import 'package:homefinder/features/auth/signin/signin.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});
@@ -55,10 +53,7 @@ class _OnboardingState extends State<Onboarding> {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 90),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [TextSmallOnboarding('Skip')],
-            ),
+            Row(mainAxisAlignment: MainAxisAlignment.end, children: []),
             Expanded(
               child: PageView(
                 controller: _pageController,
@@ -105,7 +100,7 @@ class _OnboardingState extends State<Onboarding> {
                     width: 48,
                     height: 48,
                     decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.primaryButton),
+                      border: Border.all(color: Colors.blue),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: IconButton(
@@ -113,7 +108,7 @@ class _OnboardingState extends State<Onboarding> {
                       icon: Icon(
                         Icons.arrow_back,
                         color: _currentPage > 0
-                            ? AppColors.primaryText
+                            ? Colors.grey
                             : Colors.grey.shade400,
                       ),
                     ),
@@ -129,7 +124,7 @@ class _OnboardingState extends State<Onboarding> {
                         height: 8,
                         decoration: BoxDecoration(
                           color: index == _currentPage
-                              ? AppColors.primaryButton
+                              ? Colors.blue
                               : Colors.grey.shade300,
                           borderRadius: BorderRadius.circular(4),
                         ),
@@ -142,7 +137,7 @@ class _OnboardingState extends State<Onboarding> {
                     width: 48,
                     height: 48,
                     decoration: BoxDecoration(
-                      color: AppColors.primaryButton,
+                      color: Colors.blue,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: IconButton(
@@ -211,7 +206,7 @@ class _OnboardingState extends State<Onboarding> {
             style: GoogleFonts.dmSans(
               fontSize: 24,
               fontWeight: FontWeight.w700,
-              color: AppColors.textBlack,
+              color: Colors.black,
             ),
             textAlign: TextAlign.center,
           ),
@@ -226,7 +221,7 @@ class _OnboardingState extends State<Onboarding> {
               style: GoogleFonts.dmSans(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
-                color: AppColors.textGray,
+                color: Colors.grey,
               ),
               textAlign: TextAlign.center,
             ),
