@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:homefinder/app/ui/themes/theme.dart';
-import 'package:homefinder/app/ui/widgets/custom_buttons.dart';
-import 'package:homefinder/app/ui/widgets/styled_text.dart';
+import 'package:homefinder/core/presentation/themes/colors.dart';
 
 class OtpVerification extends StatefulWidget {
   const OtpVerification({super.key});
@@ -59,12 +57,12 @@ class _OtpVerificationState extends State<OtpVerification> {
       width: 48,
       height: 48,
       decoration: BoxDecoration(
-        color: AppColors.splashScreenText,
+        color: AppColors.kWhite,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: _focusNodes[index].hasFocus
-              ? AppColors.primaryText
-              : AppColors.borderColor,
+              ? AppColors.kGrey5
+              : AppColors.kBattleshipGray,
           width: _focusNodes[index].hasFocus ? 2 : 1,
         ),
       ),
@@ -79,8 +77,8 @@ class _OtpVerificationState extends State<OtpVerification> {
           fontWeight: FontWeight.w800,
           fontSize: 28,
           color: _controllers[index].text.isNotEmpty
-              ? AppColors.textBlack
-              : const Color.fromRGBO(164, 164, 164, 1),
+              ? AppColors.kBlack
+              : AppColors.kGrey20,
         ),
         decoration: const InputDecoration(
           border: InputBorder.none,
@@ -114,64 +112,7 @@ class _OtpVerificationState extends State<OtpVerification> {
         child: Center(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 24, vertical: 300),
-            child: Column(
-              children: [
-                const TextHeading('OTP Verification'),
-
-                const SizedBox(height: 4),
-
-                const TextSmall(
-                  'We just sent a code to your number. Please enter it\nbelow to verify your account',
-                  textAlign: TextAlign.center,
-                ),
-
-                const SizedBox(height: 24),
-                //   Form
-                Form(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: List.generate(
-                          6,
-                          (index) => _buildOutputField(index),
-                        ),
-                      ),
-
-                      SizedBox(height: 24),
-
-                      SubmitButton(
-                        'Continue',
-                        onPressed: () {
-                          print('OTP: $otpCode');
-                        },
-                      ),
-
-                      SizedBox(height: 24),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          TextSmall(
-                            '00:28 Sec',
-                            color: AppColors.textBlack,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700,
-                          ),
-                          TextSmall(
-                            'Resend OTP',
-                            color: AppColors.primaryText,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            child: Column(children: []),
           ),
         ),
       ),
