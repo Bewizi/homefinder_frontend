@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homefinder/core/presentation/themes/colors.dart';
+import 'package:homefinder/core/presentation/ui/widgets/text_styles.dart';
 
 class OtpVerification extends StatefulWidget {
   const OtpVerification({super.key});
@@ -108,11 +110,31 @@ class _OtpVerificationState extends State<OtpVerification> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 300),
-            child: Column(children: []),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Center(
+            child: Padding(
+              padding: EdgeInsets.only(top: 91.h, bottom: 24.h),
+              child: Column(
+                children: [
+                  TextHeading(
+                    'OTP Verification',
+                    color: AppColors.kEerieBlack,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  SizedBox(height: 4.h),
+                  TextRegular(
+                    'We just sent a code to your number. Please enter it\nbelow to verify your account',
+                    color: AppColors.kBattleshipGray,
+                    fontSize: 12,
+                    textAlign: TextAlign.center,
+                  ),
+
+                  SizedBox(height: 24.h),
+                ],
+              ),
+            ),
           ),
         ),
       ),
