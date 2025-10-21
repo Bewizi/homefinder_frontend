@@ -4,4 +4,11 @@ class AppSvgs {
   static const String kAmicoThree = 'assets/svgs/amico_three.svg';
   static const String settings = 'assets/svgs/settings.svg';
   static const String kLogo = 'assets/svgs/home_search.svg';
+  static const String kCurvedArrowBack = 'assets/svgs/curved_arrow_back.svg';
+  static const String kCurvedArrowForward =
+      'assets/svgs/curved_arrow_forward.svg';
+  static const String kEmailIcon = 'assets/svgs/email_icon.svg';
+  static const String kEyeSlashIcon = 'assets/svgs/eye_slash.svg';
+  static const String kEyeIcon = 'assets/svgs/eye_icon.svg';
+  static const String kLock = 'assets/svgs/lock.svg';
 }
