@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppText extends StatelessWidget {
-  final String text;
+  final String? text;
   final double fontSize;
   final FontWeight? fontWeight;
   final Color? color;
@@ -9,9 +9,9 @@ class AppText extends StatelessWidget {
   final TextAlign? textAlign;
   final FontStyle? fontStyle;
 
-  const AppText({
+  const AppText(
+    this.text, {
     super.key,
-    required this.text,
     this.fontSize = 20,
     this.fontWeight,
     this.color,
@@ -23,7 +23,7 @@ class AppText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text,
+      text ?? '',
       style: TextStyle(
         fontSize: fontSize,
         fontWeight: fontWeight,
@@ -36,9 +36,9 @@ class AppText extends StatelessWidget {
 }
 
 class TextHeading extends AppText {
-  const TextHeading({
+  const TextHeading(
+    super.text, {
     super.key,
-    required super.text,
     super.fontSize = 20,
     super.fontWeight,
     super.color,
@@ -49,9 +49,9 @@ class TextHeading extends AppText {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return AppText(
       text,
-      style: TextStyle(
+      styles: TextStyle(
         fontSize: fontSize,
         fontWeight: fontWeight,
         color: color,
@@ -62,9 +62,10 @@ class TextHeading extends AppText {
 }
 
 class TextRegular extends AppText {
-  const TextRegular({
+  const TextRegular(
+    super.text, {
     super.key,
-    required super.text,
+
     super.fontSize = 14,
     super.fontWeight,
     super.color,
@@ -75,9 +76,9 @@ class TextRegular extends AppText {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return AppText(
       text,
-      style: TextStyle(
+      styles: TextStyle(
         fontSize: fontSize,
         fontWeight: fontWeight,
         color: color,
