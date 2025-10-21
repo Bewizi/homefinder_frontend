@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:homefinder/core/presentation/constant/svgs.dart';
+import 'package:homefinder/core/presentation/themes/colors.dart';
+import 'package:homefinder/core/presentation/ui/widgets/text_styles.dart';
 import 'package:homefinder/features/auth/signin/signin.dart';
 
 class Onboarding extends StatefulWidget {
@@ -97,19 +99,18 @@ class _OnboardingState extends State<Onboarding> {
                 children: [
                   //   Previous Button
                   Container(
-                    width: 48,
-                    height: 48,
+                    padding: EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blue),
-                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: AppColors.kBrand50),
+                      borderRadius: BorderRadius.circular(12),
                     ),
                     child: IconButton(
                       onPressed: _currentPage > 0 ? _previousPage : null,
-                      icon: Icon(
-                        Icons.arrow_back,
-                        color: _currentPage > 0
-                            ? Colors.grey
-                            : Colors.grey.shade400,
+                      icon: SvgPicture.asset(
+                        AppSvgs.kCurvedArrowBack,
+                        width: 24.w,
+                        height: 24.h,
+                        fit: BoxFit.scaleDown,
                       ),
                     ),
                   ),
@@ -118,14 +119,16 @@ class _OnboardingState extends State<Onboarding> {
                   Row(
                     children: List.generate(
                       _totalPages,
-                      (index) => Container(
+                      (index) => AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
                         margin: const EdgeInsets.symmetric(horizontal: 4),
                         width: index == _currentPage ? 24 : 8,
                         height: 8,
                         decoration: BoxDecoration(
                           color: index == _currentPage
-                              ? Colors.blue
-                              : Colors.grey.shade300,
+                              ? AppColors.kBrand50
+                              : AppColors.kGrey5,
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
@@ -134,10 +137,9 @@ class _OnboardingState extends State<Onboarding> {
 
                   // Next Button
                   Container(
-                    width: 48,
-                    height: 48,
+                    padding: EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: Colors.blue,
+                      color: AppColors.kBrand50,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: IconButton(
@@ -147,11 +149,11 @@ class _OnboardingState extends State<Onboarding> {
                               // Handle completion - navigate to main app
                               context.go(SignIn.routeName);
                             },
-                      icon: Icon(
-                        _currentPage < _totalPages - 1
-                            ? Icons.arrow_forward
-                            : Icons.check,
-                        color: Colors.white,
+                      icon: SvgPicture.asset(
+                        AppSvgs.kCurvedArrowForward,
+                        width: 24.w,
+                        height: 24.h,
+                        fit: BoxFit.scaleDown,
                       ),
                     ),
                   ),
@@ -188,9 +190,13 @@ class _OnboardingState extends State<Onboarding> {
                 fit: BoxFit.scaleDown,
                 errorBuilder: (context, error, stackTrace) {
                   return Container(
-                    color: Colors.grey.shade100,
-                    child: const Center(
-                      child: Icon(Icons.image, size: 64, color: Colors.grey),
+                    color: AppColors.kGrey20,
+                    child: Center(
+                      child: Icon(
+                        Icons.image,
+                        size: 64,
+                        color: AppColors.kGrey5,
+                      ),
                     ),
                   );
                 },
@@ -201,13 +207,12 @@ class _OnboardingState extends State<Onboarding> {
           const SizedBox(height: 32),
 
           // Title
-          Text(
+          TextHeading(
             title,
-            style: GoogleFonts.dmSans(
-              fontSize: 24,
-              fontWeight: FontWeight.w700,
-              color: Colors.black,
-            ),
+            fontSize: 24,
+            color: AppColors.kGrey40,
+            fontWeight: FontWeight.w700,
+
             textAlign: TextAlign.center,
           ),
 
@@ -216,13 +221,9 @@ class _OnboardingState extends State<Onboarding> {
           // Description
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
+            child: TextRegular(
               description,
-              style: GoogleFonts.dmSans(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: Colors.grey,
-              ),
+              color: AppColors.kGrey30,
               textAlign: TextAlign.center,
             ),
           ),

@@ -1,10 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:homefinder/core/presentation/constant/image.dart';
 import 'package:homefinder/core/presentation/themes/colors.dart';
 import 'package:homefinder/core/presentation/ui/widgets/app_buttons.dart';
 import 'package:homefinder/core/presentation/ui/widgets/text_styles.dart';
+import 'package:homefinder/features/auth/signin/signin.dart';
+import 'package:homefinder/features/onBoarding/onboarding.dart';
 
 class GetStarted extends StatefulWidget {
   const GetStarted({super.key});
@@ -47,7 +50,7 @@ class _GetStartedState extends State<GetStarted> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextHeading(
-                  text: 'Discover your Perfect Rental\nHome Just a Tap Away',
+                  'Discover your Perfect Rental\nHome Just a Tap Away',
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
                   color: AppColors.kWhite,
@@ -55,14 +58,13 @@ class _GetStartedState extends State<GetStarted> {
                 ),
                 SizedBox(height: 16.h),
                 TextRegular(
-                  text:
-                      'Search, compare, and rent your home - fast and easy\nwith Homefinder. Thousands of listing. Zero hassle.',
+                  'Search, compare, and rent your home - fast and easy\nwith Homefinder. Thousands of listing. Zero hassle.',
                   color: AppColors.kWhite,
                 ),
                 SizedBox(height: 28.h),
                 CustomButton(
                   text: 'Get Started',
-                  onTap: () {},
+                  onTap: () => context.go(Onboarding.routeName),
                   textColor: AppColors.kWhite,
                   color: AppColors.kBrand50,
                 ),
@@ -77,7 +79,8 @@ class _GetStartedState extends State<GetStarted> {
                         color: AppColors.kBrand50,
                         fontWeight: FontWeight.w600,
                       ),
-                      recognizer: TapGestureRecognizer()..onTap = () {},
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () => context.go(SignIn.routeName),
                     ),
                   ],
                   text: ' Already have an account? ',

@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             const SizedBox(height: 16),
             TextHeading(
-              text: 'Homefinder',
+              'Homefinder',
               fontSize: 36.sp,
               color: AppColors.kWhite,
               fontStyle: FontStyle.italic,
