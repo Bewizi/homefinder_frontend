@@ -9,6 +9,7 @@ import 'package:homefinder/core/presentation/ui/widgets/app_buttons.dart';
 import 'package:homefinder/core/presentation/ui/widgets/app_input_field.dart';
 import 'package:homefinder/core/presentation/ui/widgets/text_styles.dart';
 import 'package:homefinder/features/auth/signin/signin.dart';
+import 'package:homefinder/features/home/home_screen.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -25,35 +26,12 @@ class _SignupState extends State<Signup> {
   double _passwordStrength = 0;
   String _passwordStatus = '';
   Color _strengthColor = AppColors.kGray30;
+  bool _isPasswordVisible = false;
 
-  late TextEditingController _fullNameController;
-  late TextEditingController _phoneNumberController;
-  late TextEditingController _emailAddressController;
-  late TextEditingController _passwordController;
-
-  @override
-  void initState() {
-    super.initState();
-    _initializeControllers();
-  }
-
-  void _initializeControllers() {
-    _fullNameController = TextEditingController();
-    _phoneNumberController = TextEditingController();
-    _emailAddressController = TextEditingController();
-    _passwordController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    _fullNameController.dispose();
-    _phoneNumberController.dispose();
-    _emailAddressController.dispose();
-    _passwordController.dispose();
-
-    super.dispose();
-  }
+  final TextEditingController _fullNameController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _emailAddressController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   String getSignUpData() {
     return '${_fullNameController.text}|${_phoneNumberController.text}|${_emailAddressController.text}|${_passwordController.text}';
@@ -93,6 +71,12 @@ class _SignupState extends State<Signup> {
 
     setState(() {
       _passwordStrength = strength;
+    });
+  }
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _isPasswordVisible = !_isPasswordVisible;
     });
   }
 
@@ -158,12 +142,7 @@ class _SignupState extends State<Signup> {
                             title: 'Phone Number',
                             controller: _phoneNumberController,
                             hintText: '+234-9000-000-000',
-                            prefix: SvgPicture.asset(
-                              AppSvgs.kEmailIcon,
-                              width: 16.w,
-                              height: 16.h,
-                              fit: BoxFit.scaleDown,
-                            ),
+                            keyboardType: TextInputType.phone,
                           ),
 
                           SizedBox(height: 16.h),
@@ -194,13 +173,17 @@ class _SignupState extends State<Signup> {
                               height: 16.h,
                               fit: BoxFit.scaleDown,
                             ),
-                            suffix: SvgPicture.asset(
-                              AppSvgs.kEyeSlashIcon,
-                              width: 16.w,
-                              height: 16.h,
-                              fit: BoxFit.scaleDown,
+                            suffix: InkWell(
+                              onTap: _togglePasswordVisibility,
+                              child: SvgPicture.asset(
+                                AppSvgs.kEyeSlashIcon,
+                                width: 16.w,
+                                height: 16.h,
+                                fit: BoxFit.scaleDown,
+                              ),
                             ),
                             onChanged: (value) => _checkPasswordStrength(value),
+                            obscureText: !_isPasswordVisible,
                           ),
                           SizedBox(height: 8.h),
                           // progress bar
@@ -226,7 +209,7 @@ class _SignupState extends State<Signup> {
                           // sign in  button
                           CustomButton(
                             text: 'Sign Up',
-                            onTap: () {},
+                            onTap: () => context.go(HomeScreen.routeName),
                             color: AppColors.kBrand50,
                             textColor: AppColors.kWhite,
                           ),
