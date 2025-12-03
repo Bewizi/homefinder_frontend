@@ -27,93 +27,101 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextRegular(
-                  'Location',
-                  color: AppColors.kGrey30,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
-                const SizedBox(height: 6),
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      AppSvgs.kLocation,
-                      width: 20.w,
-                      height: 20.h,
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              pinned: true,
+              toolbarHeight: 100,
+              title: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextRegular(
+                        'Location',
+                        color: AppColors.kGrey30,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      const SizedBox(height: 6),
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            AppSvgs.kLocation,
+                            width: 20,
+                            height: 20,
+                            fit: BoxFit.scaleDown,
+                          ),
+                          const SizedBox(width: 4),
+                          TextRegular(
+                            'Alakija Street, Lagos',
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.kJet,
+                          ),
+                          const SizedBox(width: 4),
+                          SvgPicture.asset(
+                            AppSvgs.kCaretDown,
+                            width: 16,
+                            height: 16,
+                            fit: BoxFit.scaleDown,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  Container(
+                    padding: EdgeInsets.all(9),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.kGrey5, width: 1),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: SvgPicture.asset(
+                      AppSvgs.kNotificationBing,
+                      width: 24.w,
+                      height: 24.h,
                       fit: BoxFit.scaleDown,
                     ),
-                    const SizedBox(width: 4),
-                    TextRegular(
-                      'Alakija Street, Lagos',
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.kJet,
-                    ),
-                    const SizedBox(width: 4),
-                    SvgPicture.asset(
-                      AppSvgs.kCaretDown,
-                      width: 16.w,
-                      height: 16.h,
-                      fit: BoxFit.scaleDown,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const Spacer(),
-            Container(
-              padding: EdgeInsets.all(9),
-              decoration: BoxDecoration(
-                border: Border.all(color: AppColors.kGrey5, width: 1),
-                borderRadius: BorderRadius.circular(8),
+                  ),
+                ],
               ),
-              child: SvgPicture.asset(
-                AppSvgs.kNotificationBing,
-                width: 24.w,
-                height: 24.h,
-                fit: BoxFit.scaleDown,
+            ),
+
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsetsGeometry.symmetric(horizontal: 16),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.045,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: _filterOptions.length,
+                    itemBuilder: (context, index) {
+                      final filterOption = _filterOptions[index];
+
+                      return _buildFilterButton(
+                        filterOption['text'],
+                        filterOption['isSelected'],
+                        () => setState(() {
+                          for (var option in _filterOptions) {
+                            option['isSelected'] = false;
+                          }
+                          _filterOptions[index]['isSelected'] = true;
+                        }),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                child: const NearbyHomes(),
               ),
             ),
           ],
-        ),
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(left: 16.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 34.h,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: _filterOptions.length,
-                  itemBuilder: (context, index) {
-                    final filterOption = _filterOptions[index];
-
-                    return _buildFilterButton(
-                      filterOption['text'],
-                      filterOption['isSelected'],
-                      () => setState(() {
-                        for (var option in _filterOptions) {
-                          option['isSelected'] = false;
-                        }
-                        _filterOptions[index]['isSelected'] = true;
-                      }),
-                    );
-                  },
-                ),
-              ),
-
-              const SizedBox(height: 24),
-              NearbyHomes(),
-            ],
-          ),
         ),
       ),
     );
@@ -125,7 +133,7 @@ Widget _buildFilterButton(String text, bool isSelected, VoidCallback onTap) {
     onTap: onTap,
     child: Container(
       padding: EdgeInsets.symmetric(vertical: 9, horizontal: 12),
-      margin: EdgeInsets.only(right: 16.w),
+      margin: EdgeInsets.only(right: 10),
       decoration: BoxDecoration(
         color: isSelected ? AppColors.kBrand50 : AppColors.kWhite,
         border: Border.all(color: AppColors.kGrey5, width: 1),
