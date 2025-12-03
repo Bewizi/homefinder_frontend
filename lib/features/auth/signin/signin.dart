@@ -22,7 +22,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
-  bool _isLoading = false; // Add loading state
+  // bool _isLoading = false;
   bool _isPasswordVisible = false;
 
   final TextEditingController _emailAddressController = TextEditingController();
