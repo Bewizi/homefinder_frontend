@@ -15,28 +15,25 @@ class _NearbyHomesState extends State<NearbyHomes> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(right: 16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TextRegular(
-                'Homes Near You',
-                fontSize: 16,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TextRegular(
+              'Homes Near You',
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: AppColors.kJet,
+            ),
+            InkWell(
+              onTap: () {},
+              child: TextRegular(
+                'See all',
+                color: AppColors.kBrand50,
+                fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: AppColors.kJet,
               ),
-              InkWell(
-                onTap: () {},
-                child: TextRegular(
-                  'See all',
-                  color: AppColors.kBrand50,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ],
     );
