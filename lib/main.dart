@@ -8,7 +8,12 @@ import 'package:homefinder/core/presentation/themes/themes.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(DevicePreview(enabled: !kReleaseMode, builder: (context) => MyApp()));
+  runApp(
+    //   DevicePreview(enabled: !kReleaseMode,
+    // builder: (context) =>
+    // )
+    MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -22,8 +27,8 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp.router(
-          locale: DevicePreview.locale(context),
-          builder: DevicePreview.appBuilder,
+          // locale: DevicePreview.locale(context),
+          // builder: DevicePreview.appBuilder,
           // useInheritedMediaQuery: true,
           routerConfig: router,
           theme: AppThemeData.lightTheme(),
