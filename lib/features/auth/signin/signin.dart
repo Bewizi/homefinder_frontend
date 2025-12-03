@@ -23,26 +23,15 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false; // Add loading state
+  bool _isPasswordVisible = false;
 
-  late TextEditingController _emailAddressController;
-  late TextEditingController _passwordController;
+  final TextEditingController _emailAddressController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    _initializeControllers();
-  }
-
-  void _initializeControllers() {
-    _emailAddressController = TextEditingController();
-    _passwordController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _emailAddressController.dispose();
-    _passwordController.dispose();
-    super.dispose();
+  void _togglePasswordVisibility() {
+    setState(() {
+      _isPasswordVisible = !_isPasswordVisible;
+    });
   }
 
   @override
@@ -113,12 +102,17 @@ class _SignInState extends State<SignIn> {
                               height: 16.h,
                               fit: BoxFit.scaleDown,
                             ),
-                            suffix: SvgPicture.asset(
-                              AppSvgs.kEyeSlashIcon,
-                              width: 16.w,
-                              height: 16.h,
-                              fit: BoxFit.scaleDown,
+                            suffix: InkWell(
+                              onTap: _togglePasswordVisibility,
+                              child: SvgPicture.asset(
+                                AppSvgs.kEyeSlashIcon,
+                                width: 16.w,
+                                height: 16.h,
+                                fit: BoxFit.scaleDown,
+                              ),
                             ),
+                            obscureText: !_isPasswordVisible,
+                            // keyboardType: TextInputType.visiblePassword,
                           ),
                           SizedBox(height: 8.h),
                           // forgot password
