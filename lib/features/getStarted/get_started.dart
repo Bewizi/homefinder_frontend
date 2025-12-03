@@ -60,6 +60,7 @@ class _GetStartedState extends State<GetStarted> {
                 TextRegular(
                   'Search, compare, and rent your home - fast and easy\nwith Homefinder. Thousands of listing. Zero hassle.',
                   color: AppColors.kWhite,
+                  textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 28.h),
                 CustomButton(
