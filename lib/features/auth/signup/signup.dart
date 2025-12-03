@@ -22,7 +22,7 @@ class Signup extends StatefulWidget {
 
 class _SignupState extends State<Signup> {
   final _formKey = GlobalKey<FormState>();
-  bool _isLoading = false;
+  // bool _isLoading = false;
   double _passwordStrength = 0;
   String _passwordStatus = '';
   Color _strengthColor = AppColors.kGray30;
