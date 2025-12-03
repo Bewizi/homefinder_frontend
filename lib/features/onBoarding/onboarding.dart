@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:homefinder/core/presentation/constant/svgs.dart';
 import 'package:homefinder/core/presentation/themes/colors.dart';
 import 'package:homefinder/core/presentation/ui/widgets/text_styles.dart';
-import 'package:homefinder/features/auth/signin/signin.dart';
+import 'package:homefinder/features/auth/signup/signup.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});
@@ -23,7 +23,6 @@ class _OnboardingState extends State<Onboarding> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _pageController.dispose();
     super.dispose();
   }
@@ -147,7 +146,7 @@ class _OnboardingState extends State<Onboarding> {
                           ? _nextPage
                           : () {
                               // Handle completion - navigate to main app
-                              context.go(SignIn.routeName);
+                              context.go(Signup.routeName);
                             },
                       icon: SvgPicture.asset(
                         AppSvgs.kCurvedArrowForward,
@@ -171,65 +170,69 @@ class _OnboardingState extends State<Onboarding> {
     required String description,
     required String imagePath,
   }) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Image Container
-          Container(
-            width: 342,
-            height: 284.47,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: SvgPicture.asset(
-                imagePath,
-                width: 340,
-                height: 309,
-                fit: BoxFit.scaleDown,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    color: AppColors.kGrey20,
-                    child: Center(
-                      child: Icon(
-                        Icons.image,
-                        size: 64,
-                        color: AppColors.kGrey5,
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Image Container
+            Container(
+              width: 342.w,
+              height: 284.47.h,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: SvgPicture.asset(
+                  imagePath,
+                  width: 340,
+                  height: 309,
+                  fit: BoxFit.scaleDown,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      color: AppColors.kGrey20,
+                      child: Center(
+                        child: Icon(
+                          Icons.image,
+                          size: 64,
+                          color: AppColors.kGrey5,
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
-          ),
 
-          const SizedBox(height: 32),
+            const SizedBox(height: 32),
 
-          // Title
-          TextHeading(
-            title,
-            fontSize: 24,
-            color: AppColors.kGrey40,
-            fontWeight: FontWeight.w700,
+            // Title
+            TextHeading(
+              title,
+              fontSize: 24,
+              color: AppColors.kGrey40,
+              fontWeight: FontWeight.w700,
 
-            textAlign: TextAlign.center,
-          ),
-
-          const SizedBox(height: 16),
-
-          // Description
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: TextRegular(
-              description,
-              color: AppColors.kGrey30,
               textAlign: TextAlign.center,
             ),
-          ),
 
-          const SizedBox(height: 40),
-        ],
+            const SizedBox(height: 16),
+
+            // Description
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: TextRegular(
+                description,
+                color: AppColors.kGrey30,
+                textAlign: TextAlign.center,
+              ),
+            ),
+
+            const SizedBox(height: 40),
+          ],
+        ),
       ),
     );
   }
