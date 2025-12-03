@@ -11,4 +11,7 @@ class AppSvgs {
   static const String kEyeSlashIcon = 'assets/svgs/eye_slash.svg';
   static const String kEyeIcon = 'assets/svgs/eye_icon.svg';
   static const String kLock = 'assets/svgs/lock.svg';
+  static const String kLocation = 'assets/svgs/location.svg';
+  static const String kCaretDown = 'assets/svgs/caret_down.svg';
+  static const String kNotificationBing = 'assets/svgs/notification_bing.svg';
 }
