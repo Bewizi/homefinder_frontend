@@ -6,6 +6,7 @@ import 'package:homefinder/features/auth/otp/otp_verification.dart';
 import 'package:homefinder/features/auth/signin/signin.dart';
 import 'package:homefinder/features/auth/signup/signup.dart';
 import 'package:homefinder/features/getStarted/get_started.dart';
+import 'package:homefinder/features/home/home_screen.dart';
 import 'package:homefinder/features/onBoarding/onboarding.dart';
 import 'package:homefinder/features/splashScreen/splash_screen.dart';
 
@@ -53,12 +54,12 @@ final GoRouter router = GoRouter(
       builder: (context, state) => OtpVerification(),
     ),
 
-    // GoRoute(
-    //   path: HomePage.routeName,
-    //   name: 'homePage',
-    //   builder: (context, state) => HomePage(),
-    // ),
-    //
+    GoRoute(
+      path: HomeScreen.routeName,
+      name: 'home',
+      builder: (context, state) => HomeScreen(),
+    ),
+
     // GoRoute(
     //   path: AllProperties.routeName,
     //   name: 'allProperties',
