@@ -15,6 +15,7 @@ class AppField extends StatelessWidget {
   final Widget? prefix;
   final Widget? suffix;
   final Function(String)? onChanged;
+  final bool obscureText;
 
   const AppField({
     super.key,
@@ -29,6 +30,7 @@ class AppField extends StatelessWidget {
     this.prefix,
     this.suffix,
     this.onChanged,
+    this.obscureText = false,
   });
 
   Widget _buildTextFormField(BuildContext context) {
@@ -37,6 +39,7 @@ class AppField extends StatelessWidget {
       controller: controller,
       minLines: minLines,
       maxLines: maxLines,
+      obscureText: obscureText,
 
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
