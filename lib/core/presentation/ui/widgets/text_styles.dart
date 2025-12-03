@@ -49,10 +49,12 @@ class TextHeading extends AppText {
 
   @override
   Widget build(BuildContext context) {
+    final scaler = MediaQuery.textScalerOf(context);
+    final scaledSize = scaler.scale(fontSize);
     return AppText(
       text,
       styles: TextStyle(
-        fontSize: fontSize,
+        fontSize: scaledSize,
         fontWeight: fontWeight,
         color: color,
       ).merge(styles),
