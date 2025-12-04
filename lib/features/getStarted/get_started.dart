@@ -6,7 +6,8 @@ import 'package:homefinder/core/presentation/constant/image.dart';
 import 'package:homefinder/core/presentation/themes/colors.dart';
 import 'package:homefinder/core/presentation/ui/widgets/app_buttons.dart';
 import 'package:homefinder/core/presentation/ui/widgets/text_styles.dart';
-import 'package:homefinder/features/auth/signin/signin.dart';
+import 'package:homefinder/features/auth/presentation/pages/signin/signin.dart';
+
 import 'package:homefinder/features/onBoarding/onboarding.dart';
 
 class GetStarted extends StatefulWidget {
