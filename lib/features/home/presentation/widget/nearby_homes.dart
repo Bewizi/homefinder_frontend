@@ -23,7 +23,7 @@ class NearbyHomes extends StatelessWidget {
         'sqft': '1, 200 sqft',
       },
       {
-        'imagePath': AppImages.kStarlightResidence,
+        'imagePath': AppImages.kMaplewoodCottage,
         'rating': '4.93',
         'location': 'House 5, Ngozi Close, Port Harcourt',
         'propertyName': 'Maplewood Cottage',
@@ -32,6 +32,28 @@ class NearbyHomes extends StatelessWidget {
         'bed': '2 Bedrooms',
         'bath': '2 Baths',
         'sqft': '1, 000 sqft',
+      },
+      {
+        'imagePath': AppImages.kGroveHomestead,
+        'rating': '4.90',
+        'location': 'Block 3, Victoria Gardens, Lagos',
+        'propertyName': 'Grove Homestead',
+        'price': '#1.25M',
+        'durationRent': '/year',
+        'bed': '2 Bedrooms',
+        'bath': '2 Baths',
+        'sqft': '1, 200 sqft',
+      },
+      {
+        'imagePath': AppImages.kSunnydaleCottage,
+        'rating': '4.90',
+        'location': 'Block 12, Mercy Estate, Ibadan',
+        'propertyName': 'Sunnydale Cottage',
+        'price': '#1.50M',
+        'durationRent': '/year',
+        'bed': '3 Bedrooms',
+        'bath': '3 Baths',
+        'sqft': '1, 200 sqft',
       },
     ];
 
@@ -66,7 +88,7 @@ class NearbyHomes extends StatelessWidget {
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
-            itemCount: houses.length,
+            itemCount: houses.length > 3 ? 3 : houses.length,
             separatorBuilder: (_, __) => const SizedBox(width: 16),
             itemBuilder: (context, i) => _HomeCard(data: houses[i]),
           ),
