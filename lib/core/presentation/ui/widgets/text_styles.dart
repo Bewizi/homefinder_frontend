@@ -8,6 +8,7 @@ class AppText extends StatelessWidget {
   final TextStyle? styles;
   final TextAlign? textAlign;
   final FontStyle? fontStyle;
+  final TextOverflow? overflow;
 
   const AppText(
     this.text, {
@@ -18,6 +19,7 @@ class AppText extends StatelessWidget {
     this.styles,
     this.textAlign,
     this.fontStyle,
+    this.overflow,
   });
 
   @override
@@ -45,6 +47,7 @@ class TextHeading extends AppText {
     super.styles,
     super.textAlign,
     super.fontStyle,
+    super.overflow,
   });
 
   @override
@@ -59,6 +62,7 @@ class TextHeading extends AppText {
         color: color,
       ).merge(styles),
       textAlign: textAlign,
+      overflow: overflow,
     );
   }
 }
@@ -74,6 +78,7 @@ class TextRegular extends AppText {
     super.styles,
     super.textAlign,
     super.fontStyle,
+    super.overflow,
   });
 
   @override
@@ -87,6 +92,7 @@ class TextRegular extends AppText {
         fontStyle: fontStyle,
       ).merge(styles),
       textAlign: textAlign,
+      overflow: overflow,
     );
   }
 }
