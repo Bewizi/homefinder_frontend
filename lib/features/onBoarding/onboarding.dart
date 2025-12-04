@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:homefinder/core/presentation/constant/svgs.dart';
 import 'package:homefinder/core/presentation/themes/colors.dart';
 import 'package:homefinder/core/presentation/ui/widgets/text_styles.dart';
-import 'package:homefinder/features/auth/signup/signup.dart';
+import 'package:homefinder/features/auth/presentation/pages/signup/signup.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});
