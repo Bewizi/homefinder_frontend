@@ -1,12 +1,12 @@
 // Updated lib/app/routes/app_routes.dart
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:homefinder/features/auth/forgotPassword/forgot_password.dart';
-import 'package:homefinder/features/auth/otp/otp_verification.dart';
-import 'package:homefinder/features/auth/signin/signin.dart';
-import 'package:homefinder/features/auth/signup/signup.dart';
+import 'package:homefinder/features/auth/presentation/pages/forgotPassword/forgot_password.dart';
+import 'package:homefinder/features/auth/presentation/pages/otp/otp_verification.dart';
+import 'package:homefinder/features/auth/presentation/pages/signin/signin.dart';
+import 'package:homefinder/features/auth/presentation/pages/signup/signup.dart';
 import 'package:homefinder/features/getStarted/get_started.dart';
-import 'package:homefinder/features/home/home_screen.dart';
+import 'package:homefinder/features/home/presentation/pages/home_screen.dart';
 import 'package:homefinder/features/onBoarding/onboarding.dart';
 import 'package:homefinder/features/splashScreen/splash_screen.dart';
 
